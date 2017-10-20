@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Router} from 'react-router'
-import {Route, Switch} from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Router } from 'react-router'
+import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome} from './components'
-import {me} from './store'
+import { Main, Login, Signup, UserHome, Admin, AdminEdit } from './components'
+import { me, allProperties } from './store'
 
 /**
  * COMPONENT
@@ -30,6 +30,9 @@ class Routes extends Component {
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
                   <Route path='/home' component={UserHome} />
+                  <Route path='/admin/:id' component={AdminEdit} />
+                  <Route path='/admin' component={Admin} />
+
                 </Switch>
             }
             {/* Displays our Login component as a fallback */}
@@ -56,6 +59,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
+      dispatch(allProperties())
     }
   }
 }

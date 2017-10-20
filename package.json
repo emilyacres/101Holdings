@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "101Holdings",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "101 Holdings",
   "engines": {
     "node": ">= 7.0.0"
   },
@@ -14,16 +14,18 @@
     "start": "node server",
     "start-dev": "npm run build-client-watch & npm run start-server",
     "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
-    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/boilermaker-test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --compilers js:babel-register"
+    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/oneohone-test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --compilers js:babel-register"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",
     "body-parser": "^1.16.1",
+    "bootstrap": "^3.3.7",
     "compression": "^1.7.1",
     "connect-session-sequelize": "^4.1.0",
     "express": "^4.14.1",
+    "express-fileupload": "^0.3.0",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
     "morgan": "^1.8.1",
