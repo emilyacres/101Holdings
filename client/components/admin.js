@@ -27,7 +27,6 @@ const Admin = (props) => {
  * CONTAINER
  */
 const mapState = (state) => {
-  console.log("**", req)
   return {
     isLoggedIn: !!state.user.id,
     properties: state.property
