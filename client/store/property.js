@@ -5,6 +5,7 @@ import history from '../history'
  * ACTION TYPES
  */
 const FETCH_PROPERTIES = 'FETCH_PROPERTIES'
+const UPDATE_PROPERTIES = 'UPDATE_PROPERTIES'
 
 /**
  * INITIAL STATE
@@ -15,6 +16,7 @@ const defaultProperties = []
  * ACTION CREATORS
  */
 const fetchProperties = properties => ({type: FETCH_PROPERTIES, properties})
+const updateProperties = properties => ({type: UPDATE_PROPERTIES, properties})
 
 /**
  * THUNK CREATORS
@@ -24,7 +26,19 @@ export const allProperties = () =>
     axios.get('/api/properties')
       .then(res => {
         dispatch(fetchProperties(res.data || defaultProperties))
-        })
+      })
+      .catch(err => console.log(err))
+
+export const updateProperty = (property) =>
+  dispatch =>
+    axios.put(`/api/properties/${property.id}`, property)
+      .then(res => {
+        console.log(res.data)
+        return axios.get('/api/properties')
+      })
+      .then( res => {
+        dispatch(updateProperties(res.data || defaultProperties))
+      })
       .catch(err => console.log(err))
 
 /**
@@ -33,6 +47,8 @@ export const allProperties = () =>
 export default function (state = defaultProperties, action) {
   switch (action.type) {
     case FETCH_PROPERTIES:
+      return action.properties
+    case UPDATE_PROPERTIES:
       return action.properties
     default:
       return state

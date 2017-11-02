@@ -12,7 +12,6 @@ import { logout } from '../store'
  */
 const Admin = (props) => {
   const { handleClick, isLoggedIn, properties } = props
-  console.log(properties)
   return (
     <div>
       <h1>Admin Page</h1>

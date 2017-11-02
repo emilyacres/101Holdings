@@ -20,6 +20,7 @@ class AdminEdit extends React.Component {
     this.handleAcquired = this.handleAcquired.bind(this);
     this.handleFeet = this.handleFeet.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.dispatchSubmit = props.handleSubmit.bind(this);
   }
   componentWillReceiveProps (nextProps) {
     const property = nextProps.properties.filter( el => el.id == this.state.id)[0]
@@ -52,12 +53,12 @@ class AdminEdit extends React.Component {
   }
   handleSubmit (event) {
     event.preventDefault();
-    console.log(this.state)
+    this.dispatchSubmit(this.state);
   }
   render () {
     return (
       <div>
-        {this.state.name ? <h1>{this.state.name} Admin Page</h1> : <h1>Admin Page</h1>}
+        {this.state.name ? <h1>{this.propertyName} Admin Page</h1> : <h1>Admin Page</h1>}
         <form onSubmit={this.handleSubmit}>
           <div className="form-group row">
             <label className="col-sm-2 col-form-label">Name/Street Address</label>
@@ -110,6 +111,9 @@ const mapDispatch = (dispatch) => {
     handleClick () {
       dispatch(logout())
     },
+    handleSubmit (property) {
+      dispatch(updateProperty(property))
+    },
   }
 }
 
@@ -122,5 +126,6 @@ export default withRouter(connect(mapState, mapDispatch)(AdminEdit))
  */
 AdminEdit.propTypes = {
   handleClick: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }

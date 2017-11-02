@@ -11,7 +11,7 @@ router.put('/:propertyid', (req, res, next) => {
     }
   }).then(updatedProperty => {
     console.log(updatedProperty);
-    res.json (updatedProperty);
+    res.json(updatedProperty);
   })
 })
 
