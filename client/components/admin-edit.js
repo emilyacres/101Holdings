@@ -14,6 +14,7 @@ class AdminEdit extends React.Component {
       acquired: "",
       feet: "",
       id: props.match.params.id,
+      images: [],
     };
     this.handleName = this.handleName.bind(this);
     this.handleCity = this.handleCity.bind(this);
@@ -21,6 +22,7 @@ class AdminEdit extends React.Component {
     this.handleFeet = this.handleFeet.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.dispatchSubmit = props.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
   componentWillReceiveProps (nextProps) {
     const property = nextProps.properties.filter( el => el.id == this.state.id)[0]
@@ -28,8 +30,12 @@ class AdminEdit extends React.Component {
       name: property.name,
       city: property.city,
       acquired: property.acquired,
-      feet: property.feet
+      feet: property.feet,
+      images: property.images,
     })
+  }
+  handleDelete () {
+    console.log("SUCCESS")
   }
   handleName (event) {
     this.setState({
@@ -59,6 +65,17 @@ class AdminEdit extends React.Component {
     return (
       <div>
         {this.state.name ? <h1>{this.propertyName} Admin Page</h1> : <h1>Admin Page</h1>}
+        {this.state.images.map( img => {
+          return (
+            <div key={img.id}>
+              <h3>Delete photo</h3>
+              <img src={`/img/${img.fileName}`} />
+              <button onClick={() => {
+                if(confirm('Are you sure you want to delete this photo?')){
+                  this.handleDelete();
+                }}} type="submit" className="btn btn-danger">x</button>
+            </div>)
+        })}
         <form onSubmit={this.handleSubmit}>
           <div className="form-group row">
             <label className="col-sm-2 col-form-label">Name/Street Address</label>
@@ -99,7 +116,6 @@ class AdminEdit extends React.Component {
  * CONTAINER
  */
 const mapState = (state) => {
-  console.log(state)
   return {
     isLoggedIn: !!state.user.id,
     properties: state.property,

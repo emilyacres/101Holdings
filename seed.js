@@ -7,7 +7,7 @@ const { User, Property, Image } = require('./server/db/models')
 
 var data = {
   users: [
-      {email: "admin", password: "admin",},
+      {email: "admin", password: "admin"},
     ],
   properties: [
       {name: "145 Greene Street", city: "New York, NY", acquired: "09.2013", feet: 2747},
@@ -17,11 +17,11 @@ var data = {
       {name: "Miami Design District", city: "Miami, FL", acquired: "09.2014", feet: 1000000},
    ],
   images: [
-      {fileName: "/img/1", propertyId: 1},
-      {fileName: "/img/2", propertyId: 2},
-      {fileName: "/img/3", propertyId: 3},
-      {fileName: "/img/4", propertyId: 4},
-      {fileName: "/img/5", propertyId: 5},
+      {fileName: "1.png", propertyId: 1},
+      {fileName: "2.png", propertyId: 2},
+      {fileName: "3.png", propertyId: 3},
+      {fileName: "4.png", propertyId: 4},
+      {fileName: "5.png", propertyId: 5},
     ],
 };
 
