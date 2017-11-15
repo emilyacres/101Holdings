@@ -1,6 +1,5 @@
 const User = require('./user');
 const Property = require('./property');
-const Image = require('./image');
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -8,7 +7,7 @@ const Image = require('./image');
  *
  *    BlogPost.belongsTo(User)
  */
- Property.hasMany(Image)
+ //Property.hasMany(Image)
  //Image.belongsTo(Property);
 
 /**
@@ -20,5 +19,4 @@ const Image = require('./image');
 module.exports = {
   User,
   Property,
-  Image
 }

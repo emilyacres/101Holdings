@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 body {
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
 
   a {
     text-decoration: none;
@@ -18,4 +20,106 @@ body {
     margin: 1em;
     display: inline-block;
   }
+
+  .hide {
+    display: none;
+  }
+
+  .white {
+    color: white;
+  }
+
+  #landing {
+    background-image: url('/img/bg.jpg');
+    background-position:  center center;
+    background-size: cover;
+    height: 100vh;
+  }
+
+  #landing-logo {
+    margin-top: 5vh;
+    margin-left: 45vw;
+    width: 10vw;
+  }
+
+  #down-arrow {
+    margin-top: 65vh;
+    font-size: 4vw;
+    display: block;
+    margin-left: 48vw;
+  }
+
+  #properties-container {
+    margin-left: 10vw;
+    margin-right: 9vw;
+    padding-top: 5vh;
+  }
+
+  #nav {
+    margin-bottom: 5vh;
+  }
+
+  #nav-logo {
+    opacity: 50% !important;
+    width: 5vw;
+    display: inline-block;
+  }
+
+  #nav-contact {
+    text-align: right;
+    color: black;
+    margin-right: 2vw;
+    margin-top: -5vh;
+  }
+
+  #nav-contact-link {
+    opacity: 50% !important;
+    text-decoration: none;
+  }
+
+  #nav-contact:hover {
+    opacity: 100%;
+  }
+
+  .property-tile {
+    width: 25vw;
+    height: 25vw;
+    margin-right: 2vw;
+    display: inline-block;
+    margin-bottom: 2vw;
+  }
+
+  .property-tile-hover {
+    margin: 0;
+    padding: 0;
+    width: 25vw;
+    height: 25vw;
+  }
+
+  .property-tile-hover:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+
+    .property-tile-name {
+      color: black;
+    }
+
+    .property-tile-date {
+      color: black;
+    }
+  }
+
+  .property-tile-name {
+    color: rgba(255, 255, 255, 0);
+    font-weight: bold;
+    margin-top: 0;
+    padding-top: 40%;
+    text-align: center;
+  }
+
+  .property-tile-date {
+    color: rgba(255, 255, 255, 0);
+    text-align: center;
+  }
+
 }
+

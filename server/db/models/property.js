@@ -19,6 +19,14 @@ const Property = db.define('property', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
+  img: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  thumb: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
 })
 
 module.exports = Property;

@@ -1,8 +1,6 @@
 const router = require('express').Router()
-const { Property, Image } = require('../db/models')
+const { Property } = require('../db/models')
 module.exports = router
-
-
 
 router.put('/:propertyid', (req, res, next) => {
   Property.update(req.body, {
@@ -10,7 +8,6 @@ router.put('/:propertyid', (req, res, next) => {
       id: req.params.propertyid,
     }
   }).then(updatedProperty => {
-    console.log(updatedProperty);
     res.json(updatedProperty);
   })
 })
@@ -18,9 +15,8 @@ router.put('/:propertyid', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
   Property.findAll({
-    include: [ { model: Image, as: 'images' } ]
-  })
-  .then(properties => {
+
+  }).then(properties => {
     res.json(properties)})
   .catch(next)
 })
