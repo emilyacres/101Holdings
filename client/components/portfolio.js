@@ -25,6 +25,7 @@ class Portfolio extends React.Component {
     this.handleCity = this.handleCity.bind(this);
     this.handleState = this.handleState.bind(this);
     this.handleZip = this.handleZip.bind(this);
+    this.scrollUp = this.scrollUp.bind(this);
 
   }
 
@@ -62,14 +63,20 @@ class Portfolio extends React.Component {
     })
   }
 
+  scrollUp (event) {
+    event.preventDefault();
+    var top = document.getElementById("landing")
+    top.scrollIntoView({behavior: "smooth", block: "start"})
+  }
+
   render () {
     return (
       <div>
         <div id="properties-container">
           <div id="nav">
             <h3 id="nav-filter">Filter</h3>
-            <Link to="/"><img id="nav-logo" src="img/logo-black.png" /></Link>
-            <Link id="nav-contact-link" to="/"><h3 id="nav-contact">Contact</h3></Link>
+            <img onClick={this.scrollUp} id="nav-logo" src="img/logo-black.png" />
+            <Link id="nav-contact-link" to="/about"><h3 id="nav-contact">About</h3></Link>
           </div>
           <div id="filters">
             <input onChange={this.handleCity} type="city" className="form-control" id="filter-city" placeholder="City" />
@@ -78,7 +85,13 @@ class Portfolio extends React.Component {
           </div>
           {this.state.properties && this.state.filteredProperties.map(property => {
             return <div key={property.id} className="property-tile" style={{backgroundImage: 'url(img/' + property.thumb + ')', backgroundPosition:  'center center',
-      backgroundSize: 'cover'}}><div className="property-tile-hover"><h4 className="property-tile-name">{property.name}</h4><h4 className="property-tile-date">{property.acquired}</h4></div></div>
+      backgroundSize: 'cover'}}>
+                  <img className="hide" src={`img/${property.img}`} />
+                  <div className="property-tile-hover">
+                    <h4 className="property-tile-name">{property.name}</h4>
+                    <h4 className="property-tile-date">{property.acquired}</h4>
+                  </div>
+                </div>
           })}
         </div>
       </div>

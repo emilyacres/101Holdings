@@ -11,17 +11,32 @@ import { Portfolio } from './'
  *  else common to our entire app. The 'picture' inside the frame is the space
  *  rendered out by the component's `children`.
  */
-const Home = (props) => {
-  const { handleClick, isLoggedIn, properties } = props
-  return (
-    <div>
-      <div id="landing">
-        <img src="img/logo-white.png" id="landing-logo" />
-        <span id="down-arrow" className="glyphicon glyphicon-chevron-down white"></span>
+class Home extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.scrollDown = this.scrollDown.bind(this);
+
+  }
+
+  scrollDown (event) {
+    event.preventDefault();
+    var properties = document.getElementById("properties-container");
+    properties.scrollIntoView({behavior: "smooth", block: "start"})
+  }
+
+  render () {
+    return (
+      <div>
+        <div id="landing">
+          <img src="img/logo-white.png" id="landing-logo" />
+          <span id="down-arrow" onClick={this.scrollDown} className="glyphicon glyphicon-menu-down white"></span>
+        </div>
+        <Portfolio />
       </div>
-      <Portfolio />
-    </div>
-  )
+    )
+  }
 }
 
 /**

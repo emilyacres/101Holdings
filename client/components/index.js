@@ -10,4 +10,5 @@ export { default as Admin } from './admin'
 export { default as AdminEdit } from './admin-edit'
 export { default as Home } from './home'
 export { default as Portfolio } from './portfolio'
+export { default as About} from './about'
 
