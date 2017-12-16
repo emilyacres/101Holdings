@@ -47,6 +47,7 @@ body {
     font-size: 4vw;
     display: block;
     margin-left: 48vw;
+    cursor: pointer;
   }
 
   #properties-container {
@@ -56,29 +57,72 @@ body {
   }
 
   #nav {
-    margin-bottom: 5vh;
+    margin-bottom: 3vh;
+  }
+
+  #nav-filter {
+    width: 5vw;
+    float: left;
+    opacity: .7;
+    color: black;
   }
 
   #nav-logo {
-    opacity: 50% !important;
+    position: relative;
+    opacity: .7;
     width: 5vw;
     display: inline-block;
+    margin-left: 32.5vw;
   }
 
   #nav-contact {
-    text-align: right;
     color: black;
+    opacity: .7;
+    float: right;
     margin-right: 2vw;
-    margin-top: -5vh;
   }
 
   #nav-contact-link {
-    opacity: 50% !important;
     text-decoration: none;
   }
 
+  #nav-logo:hover {
+    opacity: 1;
+  }
+
   #nav-contact:hover {
-    opacity: 100%;
+    opacity: 1;
+  }
+
+  #nav-filter:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  #filters {
+    display: none;
+
+    input {
+      width: 15vw;
+      border: none;
+      border-bottom: black solid 1px;
+      display: inline-block;
+      border-radius: 0;
+      color: black;
+      padding: 0;
+      box-shadow: none;
+      margin-bottom: 5vh;
+    }
+
+    #filter-zip {
+      float:right;
+      margin-right: 2vw;
+    }
+
+    #filter-state {
+      margin-left: 18.5vw;
+    }
+
   }
 
   .property-tile {

@@ -10,22 +10,80 @@ import { logout } from '../store'
  *  else common to our entire app. The 'picture' inside the frame is the space
  *  rendered out by the component's `children`.
  */
-const Portfolio = (props) => {
-  const { handleClick, isLoggedIn, properties } = props
-  return (
-    <div>
-      <div id="properties-container">
-        <div id="nav">
-          <Link to="/"><img id="nav-logo" src="img/logo-black.png" /></Link>
-          <Link id="nav-contact-link" to="/"><h3 id="nav-contact">Contact</h3></Link>
+class Portfolio extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      filteredProperties: props.properties,
+      properties: props.properties,
+      city: "",
+      state: "",
+      zip: ""
+    }
+
+    this.handleCity = this.handleCity.bind(this);
+    this.handleState = this.handleState.bind(this);
+    this.handleZip = this.handleZip.bind(this);
+
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      filteredProperties: nextProps.properties,
+      properties: nextProps.properties
+    })
+  }
+
+  handleCity (event) {
+    var newProperties = this.state.properties.filter( property => {
+        return property.city.toUpperCase().startsWith(event.target.value.toUpperCase())
+      })
+    this.setState({
+      filteredProperties: newProperties
+    })
+  }
+
+  handleState (event) {
+    var newProperties = this.state.properties.filter( property => {
+        return property.state.toUpperCase().startsWith(event.target.value.toUpperCase())
+      })
+    this.setState({
+      filteredProperties: newProperties
+    })
+  }
+
+  handleZip (event) {
+    var newProperties = this.state.properties.filter( property => {
+        return property.zip.toUpperCase().startsWith(event.target.value.toUpperCase())
+      })
+    this.setState({
+      filteredProperties: newProperties
+    })
+  }
+
+  render () {
+    return (
+      <div>
+        <div id="properties-container">
+          <div id="nav">
+            <h3 id="nav-filter">Filter</h3>
+            <Link to="/"><img id="nav-logo" src="img/logo-black.png" /></Link>
+            <Link id="nav-contact-link" to="/"><h3 id="nav-contact">Contact</h3></Link>
+          </div>
+          <div id="filters">
+            <input onChange={this.handleCity} type="city" className="form-control" id="filter-city" placeholder="City" />
+            <input onChange={this.handleState} type="state" className="form-control" id="filter-state" placeholder="State" />
+            <input onChange={this.handleZip} type="zip" className="form-control" id="filter-zip" placeholder="Zip Code" />
+          </div>
+          {this.state.properties && this.state.filteredProperties.map(property => {
+            return <div key={property.id} className="property-tile" style={{backgroundImage: 'url(img/' + property.thumb + ')', backgroundPosition:  'center center',
+      backgroundSize: 'cover'}}><div className="property-tile-hover"><h4 className="property-tile-name">{property.name}</h4><h4 className="property-tile-date">{property.acquired}</h4></div></div>
+          })}
         </div>
-        {properties.map(property => {
-          return <div key={property.id} className="property-tile" style={{backgroundImage: 'url(img/' + property.thumb + ')', backgroundPosition:  'center center',
-    backgroundSize: 'cover'}}><div className="property-tile-hover"><h4 className="property-tile-name">{property.name}</h4><h4 className="property-tile-date">{property.acquired}</h4></div></div>
-        })}
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 /**

@@ -11,6 +11,14 @@ const Property = db.define('property', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  state: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  zip: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   acquired: {
     type: Sequelize.STRING,
     allowNull: false
