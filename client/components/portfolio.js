@@ -26,6 +26,7 @@ class Portfolio extends React.Component {
     this.handleState = this.handleState.bind(this);
     this.handleZip = this.handleZip.bind(this);
     this.scrollUp = this.scrollUp.bind(this);
+    this.closeImg = this.closeImg.bind(this);
 
   }
 
@@ -65,8 +66,52 @@ class Portfolio extends React.Component {
 
   scrollUp (event) {
     event.preventDefault();
-    var top = document.getElementById("landing")
+    let top = document.getElementById("landing")
     top.scrollIntoView({behavior: "smooth", block: "start"})
+  }
+
+  expandImg (propertyId) {
+    let propertyData = this.state.properties.filter(prop => prop.id === propertyId)[0];
+    let fullImg = this.state.properties.filter(prop => prop.id === propertyId)[0].img;
+    let fullImgDiv = document.getElementById("full-img");
+    let classes = Array.prototype.slice.call(fullImgDiv.classList);
+
+    if (classes.includes("hide")) {
+      //create text nodes for hover state
+      let name = document.createTextNode(propertyData.name);
+      let city = document.createTextNode(propertyData.city + ', ' + propertyData.state)
+      let acquired = document.createTextNode(propertyData.acquired);
+      let feet = document.createTextNode(propertyData.feet + " Sq ft.");
+      //add text node to proper places
+      document.getElementById("full-img-name").appendChild(name);
+      document.getElementById("full-img-city").appendChild(city);
+      document.getElementById("full-img-acquired").appendChild(acquired);
+      document.getElementById("full-img-feet").appendChild(feet);
+      //make full image visible
+      fullImgDiv.classList.remove("hide");
+      fullImgDiv.style.backgroundImage = "url(img/" + fullImg + ")";
+      document.getElementById("nav").scrollIntoView({behavior: "smooth", block: "start"})
+
+      fullImgDiv.classList.add("propertyId" + propertyId);
+
+
+    }
+  }
+
+  closeImg () {
+    //hide image
+    let fullImgDiv = document.getElementById("full-img");
+    let classes = Array.prototype.slice.call(fullImgDiv.classList);
+    let propertyId = classes.filter( clas => clas.startsWith("propertyId"))[0].slice(10);
+    //remove property id class and hide full image
+    document.getElementById("full-img").classList = [];
+    fullImgDiv.classList.add("hide");
+    //clear out the text
+    document.getElementById("full-img-name").innerHTML = "";
+    document.getElementById("full-img-city").innerHTML = "";
+    document.getElementById("full-img-acquired").innerHTML = "";
+    document.getElementById("full-img-feet").innerHTML = "";
+    document.getElementById(propertyId).scrollIntoView({behavior: "smooth", block: "start"})
   }
 
   render () {
@@ -83,10 +128,19 @@ class Portfolio extends React.Component {
             <input onChange={this.handleState} type="state" className="form-control" id="filter-state" placeholder="State" />
             <input onChange={this.handleZip} type="zip" className="form-control" id="filter-zip" placeholder="Zip Code" />
           </div>
+          <div id="full-img" className="hide">
+            <div id="full-img-hover">
+              <h4 onClick={this.closeImg} id="close-img">x</h4>
+              <h4 id="full-img-name" className="bold"></h4>
+              <h4 id="full-img-city"></h4>
+              <h4 id="full-img-acquired"></h4>
+              <h4 id="full-img-feet"></h4>
+            </div>
+          </div>
           {this.state.properties && this.state.filteredProperties.map(property => {
-            return <div key={property.id} className="property-tile" style={{backgroundImage: 'url(img/' + property.thumb + ')', backgroundPosition:  'center center',
+            return <div onClick={this.expandImg.bind(this, property.id)} key={property.id} id={property.id} className="property-tile" style={{backgroundImage: 'url(img/' + property.thumb + ')', backgroundPosition:  'center center',
       backgroundSize: 'cover'}}>
-                  <img className="hide" src={`img/${property.img}`} />
+
                   <div className="property-tile-hover">
                     <h4 className="property-tile-name">{property.name}</h4>
                     <h4 className="property-tile-date">{property.acquired}</h4>

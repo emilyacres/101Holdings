@@ -22,7 +22,7 @@ body {
   }
 
   .hide {
-    display: none;
+    display: none !important;
   }
 
   .white {
@@ -131,6 +131,50 @@ body {
 
   }
 
+  #full-img {
+    width: 79vw;
+    height: 79vh;
+    background-position:  center center;
+    background-size: cover;
+    margin-bottom: 2vw;
+    text-align: center;
+  }
+
+  #full-img-hover {
+    margin: 0;
+    padding: 0;
+    width: 79vw;
+    height: 79vh;
+    visibility: hidden;
+    background-color: rgba(255, 255, 255, .8);
+  }
+
+  #full-img-hover:hover {
+    visibility: visible;
+  }
+
+  #full-img:hover {
+    #full-img-hover {
+      visibility: visible;
+    }
+
+    #close-img {
+      text-align: right;
+      padding: 1vw;
+      cursor: pointer;
+    }
+  }
+
+  #close-img {
+    text-align: right;
+    padding: 1vw;
+    opacity: 1 !important;
+  }
+
+  #full-img-name {
+    margin-top: 20vh;
+  }
+
   .property-tile {
     width: 25vw;
     height: 25vw;
@@ -172,14 +216,29 @@ body {
     text-align: center;
   }
 
-  .property-tile-full {
-    width: 78vw !important;
+  /*.property-tile-full {
+    width: 79vw !important;
+    .property-tile-hover {
+      width: 100%;
+    }
 
     img {
       display: initial !important;
       width: 100% !important;
     }
   }
+
+  .property-tile-full:hover {
+
+
+    .property-tile-name {
+      color: black !important;
+    }
+
+    .property-tile-date {
+      color: black !important;
+    }
+  }*/
 
   #about-header {
     margin-bottom: 10vh;

@@ -16,11 +16,11 @@ $( document ).ready(function () {
   //   $('html, body').animate({scrollTop: 0}, 1000);
   // })
 
-  $('.property-tile-hover').click(function () {
-    console.log("hello")
-    $(this).addClass(".property-tile-full");
-    $(this).removeClass(".property-tile");
-  })
+  // $('.property-tile-hover').click(function () {
+  //   console.log("hello")
+  //   $(this).addClass(".property-tile-full");
+  //   $(this).removeClass(".property-tile");
+  // })
 
   // $('#contact-btn').click(function () {
   //   console.log("hellow")
