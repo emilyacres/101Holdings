@@ -66,8 +66,9 @@ class About extends React.Component {
       <div>
         <div id="about-container">
           <div id="about-header">
-            <h3 id="about-title">About</h3>
-            <Link to="/"><h2 id="close-about">x</h2></Link>
+            <h3 id="about-title" className="desktop">About</h3>
+            <img src="img/logo-black.png" className="mobile" id="about-title" />
+            <Link to="/"><img src="img/x.png" id="close-about" /></Link>
           </div>
           <form onSubmit={this.handleSubmit} id="contact-form">
             <input onChange={this.handleName} type="name" className="form-control contact-input" id="" placeholder="Name" />

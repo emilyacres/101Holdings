@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+
 body {
   font-family: 'Roboto', sans-serif;
+
+
 
   a {
     text-decoration: none;
@@ -49,7 +52,7 @@ body {
 
   #down-arrow {
     margin-top: 65vh;
-    font-size: 4vw;
+    width: 4vw;
     display: block;
     margin-left: 48vw;
     cursor: pointer;
@@ -245,6 +248,8 @@ body {
   }
 
   #close-about {
+    margin-top: 2vh;
+    width: 1.3vw;
     float: right;
     cursor: pointer;
     color: black;
@@ -337,3 +342,90 @@ body {
 
 }
 
+@media (min-width: 801px) {
+  .mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 800px) {
+  body {
+    .desktop {
+      display: none;
+    }
+
+    .mobile {
+      display: inital !important;
+    }
+
+    #mobile-nav {
+      margin-bottom: -2vh;
+    }
+
+    #mobile-logo {
+      position: relative;
+      width: 15vw;
+      left: -5vw;
+      top: -3vh;
+    }
+
+    #mobile-menu {
+      width: 10vw;
+      float: right;
+    }
+
+    #landing-logo {
+      margin-top: 5vh;
+      margin-left: 35vw;
+      width: 30vw;
+    }
+
+    #down-arrow {
+      margin-top: 65vh;
+      width: 16vw;
+      display: block;
+      margin-left: 42vw;
+      cursor: pointer;
+    }
+
+    .property-tile {
+      width: 80vw;
+      height: 80vw;
+      display: inline-block;
+      margin-bottom: 5vw;
+    }
+
+    .property-tile-hover {
+      margin: 0;
+      padding: 0;
+      width: 80vw;
+      height: 80vw;
+    }
+
+    #contact-btn {
+      width: 15vw;
+      left: 45vw;
+    }
+
+  #close-about {
+    margin-top: 2vh;
+    width: 3vw;
+    float: right;
+    cursor: pointer;
+    color: black;
+  }
+
+  #about-title {
+      position: relative;
+      width: 15vw;
+      left: -10vw;
+      top: -2vh;
+
+  }
+
+
+
+  }
+
+
+}

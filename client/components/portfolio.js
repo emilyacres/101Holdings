@@ -71,6 +71,9 @@ class Portfolio extends React.Component {
   }
 
   expandImg (propertyId) {
+    if (window.innerWidth <= 800) {
+      return ;
+    }
     let propertyData = this.state.properties.filter(prop => prop.id === propertyId)[0];
     let fullImg = this.state.properties.filter(prop => prop.id === propertyId)[0].img;
     let fullImgDiv = document.getElementById("full-img");
@@ -118,7 +121,11 @@ class Portfolio extends React.Component {
     return (
       <div>
         <div id="properties-container">
-          <div id="nav">
+          <div id="mobile-nav" className="mobile">
+            <img src="img/logo-black.png" onClick={this.scrollUp} id="mobile-logo" />
+            <img src="img/menu.png" id="mobile-menu" />
+          </div>
+          <div id="nav" className="desktop">
             <h3 id="nav-filter">Filter</h3>
             <img onClick={this.scrollUp} id="nav-logo" src="img/logo-black.png" />
             <Link id="nav-contact-link" to="/about"><h3 id="nav-contact">About</h3></Link>
@@ -143,7 +150,9 @@ class Portfolio extends React.Component {
 
                   <div className="property-tile-hover">
                     <h4 className="property-tile-name">{property.name}</h4>
+                    <h4 className="property-tile-date mobile">{property.city}, {property.state}</h4>
                     <h4 className="property-tile-date">{property.acquired}</h4>
+                    <h4 className="property-tile-date mobile">{property.feet}</h4>
                   </div>
                 </div>
           })}

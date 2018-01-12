@@ -31,7 +31,7 @@ class Home extends React.Component {
       <div>
         <div id="landing">
           <img src="img/logo-white.png" id="landing-logo" />
-          <span id="down-arrow" onClick={this.scrollDown} className="glyphicon glyphicon-menu-down white"></span>
+          <img src="img/arrow.png" id="down-arrow" onClick={this.scrollDown} />
         </div>
         <Portfolio />
       </div>
