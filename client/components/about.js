@@ -55,7 +55,6 @@ class About extends React.Component {
   }
 
   handleSubmit (event) {
-
     event.preventDefault();
     document.getElementById("contact-form").style.display = "none";
     document.getElementById("thank-you").style.display = "block";

@@ -27,6 +27,9 @@ class Portfolio extends React.Component {
     this.handleZip = this.handleZip.bind(this);
     this.scrollUp = this.scrollUp.bind(this);
     this.closeImg = this.closeImg.bind(this);
+    this.showMenu = this.showMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+    this.showMobileFilters = this.showMobileFilters.bind(this);
 
   }
 
@@ -71,6 +74,7 @@ class Portfolio extends React.Component {
   }
 
   expandImg (propertyId) {
+    //prevent mobile users from expanding images
     if (window.innerWidth <= 800) {
       return ;
     }
@@ -117,45 +121,84 @@ class Portfolio extends React.Component {
     document.getElementById(propertyId).scrollIntoView({behavior: "smooth", block: "start"})
   }
 
+  showMenu () {
+    document.getElementById("mobile-menu-list").classList.remove("hide")
+  }
+
+  closeMenu (event) {
+    if( event.key && event.key !== "Enter" ) {
+      return;
+    }
+    console.log(document.getElementById("mobile-menu-list").classList)
+
+    document.getElementById("mobile-menu-list").classList.add("hide")
+
+  }
+
+  showMobileFilters () {
+    let filters = document.getElementById("mobile-filters")
+    let classes = Array.prototype.slice.call(filters.classList);
+
+    if (classes.includes("hide")) {
+      document.getElementById("mobile-filters").classList.remove("hide");
+      document.getElementById("mobile-filter-toggle").classList.add("gray")
+    } else {
+      document.getElementById("mobile-filters").classList.add("hide");
+      document.getElementById("mobile-filter-toggle").classList.remove("gray")
+    }
+  }
+
   render () {
     return (
       <div>
         <div id="properties-container">
-          <div id="mobile-nav" className="mobile">
-            <img src="img/logo-black.png" onClick={this.scrollUp} id="mobile-logo" />
-            <img src="img/menu.png" id="mobile-menu" />
+          <div id="mobile-menu-list" className="mobile hide">
+            <img src="img/x.png" onClick={this.closeMenu} id="mobile-close" />
+            <h1 onClick={this.scrollUp}>Home</h1>
+            <h1 onClick={this.closeMenu}>Portfolio</h1>
+            <h1 id="mobile-filter-toggle" onClick={this.showMobileFilters}>Filter</h1>
+              <div id="mobile-filters" className="hide">
+                <input onChange={this.handleCity} onKeyPress={this.closeMenu} type="city" className="form-control" id="mobile-filter-city" placeholder="City" />
+                <input onChange={this.handleState} onKeyPress={this.closeMenu} type="state" className="form-control" id="mobile-filter-state" placeholder="State" />
+                <input onChange={this.handleZip} onKeyPress={this.closeMenu} type="zip" className="form-control" id="mobile-filter-zip" placeholder="Zip" />
+              </div>
+            <Link to="/about"><h1>About</h1></Link>
           </div>
-          <div id="nav" className="desktop">
-            <h3 id="nav-filter">Filter</h3>
-            <img onClick={this.scrollUp} id="nav-logo" src="img/logo-black.png" />
-            <Link id="nav-contact-link" to="/about"><h3 id="nav-contact">About</h3></Link>
-          </div>
-          <div id="filters">
-            <input onChange={this.handleCity} type="city" className="form-control" id="filter-city" placeholder="City" />
-            <input onChange={this.handleState} type="state" className="form-control" id="filter-state" placeholder="State" />
-            <input onChange={this.handleZip} type="zip" className="form-control" id="filter-zip" placeholder="Zip Code" />
-          </div>
-          <div id="full-img" className="hide">
-            <div id="full-img-hover">
-              <h4 onClick={this.closeImg} id="close-img">x</h4>
-              <h4 id="full-img-name" className="bold"></h4>
-              <h4 id="full-img-city"></h4>
-              <h4 id="full-img-acquired"></h4>
-              <h4 id="full-img-feet"></h4>
+            <div id="mobile-nav" className="mobile">
+              <img src="img/logo-black.png" onClick={this.scrollUp} id="mobile-logo" />
+              <img src="img/menu.png" id="mobile-menu" onClick={this.showMenu} />
             </div>
-          </div>
-          {this.state.properties && this.state.filteredProperties.map(property => {
-            return <div onClick={this.expandImg.bind(this, property.id)} key={property.id} id={property.id} className="property-tile" style={{backgroundImage: 'url(img/' + property.thumb + ')', backgroundPosition:  'center center',
-      backgroundSize: 'cover'}}>
+            <div id="nav" className="desktop">
+              <h3 id="nav-filter">Filter</h3>
+              <img onClick={this.scrollUp} id="nav-logo" src="img/logo-black.png" />
+              <Link id="nav-contact-link" to="/about"><h3 id="nav-contact">About</h3></Link>
+            </div>
+            <div id="filters">
+              <input onChange={this.handleCity} type="city" className="form-control" id="filter-city" placeholder="City" />
+              <input onChange={this.handleState} type="state" className="form-control" id="filter-state" placeholder="State" />
+              <input onChange={this.handleZip} type="zip" className="form-control" id="filter-zip" placeholder="Zip Code" />
+            </div>
+            <div id="full-img" className="hide">
+              <div id="full-img-hover">
+                <h4 onClick={this.closeImg} id="close-img">x</h4>
+                <h4 id="full-img-name" className="bold"></h4>
+                <h4 id="full-img-city"></h4>
+                <h4 id="full-img-acquired"></h4>
+                <h4 id="full-img-feet"></h4>
+              </div>
+            </div>
+            {this.state.properties && this.state.filteredProperties.map(property => {
+              return <div onClick={this.expandImg.bind(this, property.id)} key={property.id} id={property.id} className="property-tile" style={{backgroundImage: 'url(img/' + property.thumb + ')', backgroundPosition:  'center center',
+        backgroundSize: 'cover'}}>
 
-                  <div className="property-tile-hover">
-                    <h4 className="property-tile-name">{property.name}</h4>
-                    <h4 className="property-tile-date mobile">{property.city}, {property.state}</h4>
-                    <h4 className="property-tile-date">{property.acquired}</h4>
-                    <h4 className="property-tile-date mobile">{property.feet}</h4>
+                    <div className="property-tile-hover">
+                      <h4 className="property-tile-name">{property.name}</h4>
+                      <h4 className="property-tile-date mobile">{property.city}, {property.state}</h4>
+                      <h4 className="property-tile-date">{property.acquired}</h4>
+                      <h4 className="property-tile-date mobile">{property.feet}</h4>
+                    </div>
                   </div>
-                </div>
-          })}
+            })}
         </div>
       </div>
     )

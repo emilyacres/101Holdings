@@ -358,6 +358,10 @@ body {
       display: inital !important;
     }
 
+    .gray {
+      color: gray !important;
+    }
+
     #mobile-nav {
       margin-bottom: -2vh;
     }
@@ -372,6 +376,7 @@ body {
     #mobile-menu {
       width: 10vw;
       float: right;
+      margin-right: -3vw;
     }
 
     #landing-logo {
@@ -423,9 +428,62 @@ body {
 
   }
 
+  #mobile-menu-list {
+    width: 100vw;
+    min-height: 150vh;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    top: 100vh;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 7vh 10vw;
 
+    h1 {
+      font-size: 21vw;
+      color: black;
+    }
 
+    #mobile-close {
+      position: absolute;
+      top: 5vh;
+      right: 5vw;
+      width: 8vw;
+    }
+
+    input {
+      width: 80vw;
+      font-size: 21vw;
+      border: none;
+      border-bottom: black solid 2px;
+      box-shadow: none;
+      color: black;
+      height: 15vh;
+      margin: 0;
+      padding: 0 0 1vh 0;
+      border-radius: 0;
+    }
+
+    input::-webkit-input-placeholder {
+      color: black !important;
+    }
+
+    input:-moz-placeholder { /* Firefox 18- */
+      color: black !important;
+    }
+
+    input::-moz-placeholder {  /* Firefox 19+ */
+      color: black !important;
+    }
+
+    input:-ms-input-placeholder {
+      color: black !important;
+    }
   }
 
 
+  }
 }
