@@ -129,7 +129,6 @@ class Portfolio extends React.Component {
     if( event.key && event.key !== "Enter" ) {
       return;
     }
-    console.log(document.getElementById("mobile-menu-list").classList)
 
     document.getElementById("mobile-menu-list").classList.add("hide")
 

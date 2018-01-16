@@ -4,7 +4,9 @@
 body {
   font-family: 'Roboto', sans-serif;
 
-
+  .red {
+    color: red;
+  }
 
   a {
     text-decoration: none;
@@ -338,6 +340,12 @@ body {
     margin-top: 50vh;
     margin-bottom: 5vh;
     display: none;
+  }
+
+  #valid-email {
+    margin-bottom: 5vh;
+    font-weight: bold;
+    color: red !important;
   }
 
 }

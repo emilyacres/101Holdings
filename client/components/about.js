@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { logout } from '../store'
+import { logout, submitContact } from '../store'
 
 /**
  * COMPONENT
@@ -26,6 +26,7 @@ class About extends React.Component {
     this.handleSubject = this.handleSubject.bind(this);
     this.handleMessage = this.handleMessage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.dispatchSubmit = props.handleSubmit.bind(this);
 
   }
 
@@ -51,13 +52,18 @@ class About extends React.Component {
     this.setState({
       message: event.target.value
     })
-    console.log(this.state)
   }
 
   handleSubmit (event) {
     event.preventDefault();
-    document.getElementById("contact-form").style.display = "none";
-    document.getElementById("thank-you").style.display = "block";
+    if(!this.state.email || !this.state.email.includes("@") || !this.state.email.includes(".")) {
+      document.getElementById("valid-email").classList.remove("hide");
+    } else {
+      document.getElementById("contact-form").style.display = "none";
+      document.getElementById("thank-you").style.display = "block";
+      this.dispatchSubmit(this.state);
+      document.getElementById("valid-email").classList.add("hide");
+    }
   }
 
   render () {
@@ -69,7 +75,7 @@ class About extends React.Component {
             <img src="img/logo-black.png" className="mobile" id="about-title" />
             <Link to="/"><img src="img/x.png" id="close-about" /></Link>
           </div>
-          <form onSubmit={this.handleSubmit} id="contact-form">
+          <form onSubmit={ this.handleSubmit} id="contact-form">
             <input onChange={this.handleName} type="name" className="form-control contact-input" id="" placeholder="Name" />
             <input onChange={this.handleEmail} type="email" className="form-control contact-input" id="contact-email" placeholder="Email*" />
             <input onChange={this.handleSubject} type="subject" className="form-control contact-input" id="" placeholder="Subject" />
@@ -77,6 +83,7 @@ class About extends React.Component {
             <textarea onChange={this.handleMessage} type="message" id="contact-message" className="form-control contact-input" placeholder="" />
             <button id="contact-btn" type="submit">Send</button>
           </form>
+          <h4 id="valid-email" className="red hide bold">Please enter a valid email address</h4>
           <div id="thank-you" className="">
             <h4>Thank you for your message, we'll get back to you soon.</h4>
           </div>
@@ -114,7 +121,10 @@ const mapDispatch = (dispatch) => {
   return {
     handleClick () {
       dispatch(logout())
-    }
+    },
+    handleSubmit (contact) {
+      dispatch(submitContact(contact))
+    },
   }
 }
 

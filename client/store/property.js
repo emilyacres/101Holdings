@@ -41,6 +41,7 @@ export const updateProperty = (property) =>
       })
       .catch(err => console.log(err))
 
+
 /**
  * REDUCER
  */
