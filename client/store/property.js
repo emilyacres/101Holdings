@@ -31,7 +31,7 @@ export const allProperties = () =>
 
 export const updateProperty = (property) =>
   dispatch =>
-    axios.put(`/api/properties/${property.id}`, property)
+    axios.put(`/api/properties/${property.id}`, property, { 'content-type': 'multipart/form-data' })
       .then(res => {
         console.log(res.data)
         return axios.get('/api/properties')

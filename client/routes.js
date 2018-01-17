@@ -17,14 +17,12 @@ class Routes extends Component {
 
   render () {
     const {isLoggedIn} = this.props
-
     return (
       <Router history={history}>
         <Main>
           <Switch>
             {/* Routes placed here are available to all visitors */}
             <Route path='/login' component={Login} />
-            <Route path='/signup' component={Signup} />
             <Route path='/about' component={About} />
             <Route path='/' component={Home} />
 
@@ -32,14 +30,14 @@ class Routes extends Component {
               isLoggedIn &&
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
-                  <Route path='/home' component={UserHome} />
                   <Route path='/admin/:id' component={AdminEdit} />
                   <Route path='/admin' component={Admin} />
-
                 </Switch>
             }
             {/* Displays our Login component as a fallback */}
-            <Route component={Home} />
+
+            <Route path='/' component={Home} />
+            <Route component={Login} />
           </Switch>
         </Main>
       </Router>

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { logout, updateProperty } from '../store'
+import { logout, updateProperty, updateImg } from '../store'
 
 
 class AdminEdit extends React.Component {
@@ -11,31 +11,34 @@ class AdminEdit extends React.Component {
     this.state = {
       name: "",
       city: "",
+      state: "",
       acquired: "",
       feet: "",
+      img: "",
+      thumb: "",
       id: props.match.params.id,
-      images: [],
     };
     this.handleName = this.handleName.bind(this);
     this.handleCity = this.handleCity.bind(this);
+    this.handleState = this.handleState.bind(this);
     this.handleAcquired = this.handleAcquired.bind(this);
     this.handleFeet = this.handleFeet.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.dispatchSubmit = props.handleSubmit.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    this.updateImg = this.updateImg.bind(this);
+    this.dispatchImg = props.updateImg.bind(this);
   }
   componentWillReceiveProps (nextProps) {
     const property = nextProps.properties.filter( el => el.id == this.state.id)[0]
     this.setState({
       name: property.name,
       city: property.city,
+      state: property.state,
       acquired: property.acquired,
       feet: property.feet,
-      images: property.images,
+      img: property.img,
+      thumb: property.thumb,
     })
-  }
-  handleDelete () {
-    console.log("SUCCESS")
   }
   handleName (event) {
     this.setState({
@@ -45,6 +48,11 @@ class AdminEdit extends React.Component {
   handleCity (event) {
     this.setState({
       city: event.target.value,
+    })
+  }
+  handleState (event) {
+    this.setState({
+      state: event.target.value,
     })
   }
   handleAcquired (event) {
@@ -61,52 +69,60 @@ class AdminEdit extends React.Component {
     event.preventDefault();
     this.dispatchSubmit(this.state);
   }
+  updateImg (event) {
+    event.preventDefault();
+    console.log(typeof event.target)
+    console.log(event.target.files[0])
+    // this.setState({
+    //   img: event.target.files[0],
+    // })
+    let data = {};
+    data.img = event.target.files[0]
+    this.dispatchImg(event.target.files[0])
+  }
   render () {
+
     return (
       <div>
-        {this.state.name ? <h1>{this.propertyName} Admin Page</h1> : <h1>Admin Page</h1>}
-        {this.state.images.map( img => {
-          return (
-            <div key={img.id}>
-              <h3>Delete photo</h3>
-              <img src={`/img/${img.fileName}`} />
-              <button onClick={() => {
-                if(confirm('Are you sure you want to delete this photo?')){
-                  this.handleDelete();
-                }}} type="submit" className="btn btn-danger">x</button>
-            </div>)
-        })}
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">Name/Street Address</label>
-            <div className="col-sm-10">
-              <input onChange={this.handleName} type="name" className="form-control" id="name" placeholder={this.state.name ? this.state.name : "123 New Street"} />
+        <div id="admin-edit-img" style={{backgroundImage: `url(/img/${this.state.img})`}} />
+        <h1 id="edit-property">Edit Property</h1>
+        <div id="edit-container">
+          <form onSubmit={this.handleSubmit}  encType="multipart/form-data">
+            <div>
+              <label className="admin-edit-lbl">Name/Street Address</label>
+              <input onChange={this.handleName} type="name" className="admin-edit-input" id="name" placeholder={this.state.name ? this.state.name : "123 New Street"} />
             </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">City & State</label>
-            <div className="col-sm-10">
-              <input onChange={this.handleCity} type="city" className="form-control" id="city" placeholder={this.state.city ? this.state.city : "City, State"} />
+            <div>
+              <label className="admin-edit-lbl">City</label>
+              <input onChange={this.handleCity} type="city" className="admin-edit-input" id="city" placeholder={this.state.city ? this.state.city : "City"} />
             </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">Acquire Date</label>
-            <div className="col-sm-10">
-              <input onChange={this.handleAcquired} type="aqcuired" className="form-control" id="aqcuired" placeholder={this.state.acquired ? this.state.acquired : "01.2000"} />
+            <div>
+              <label className="admin-edit-lbl">State</label>
+              <input onChange={this.handleState} type="city" className="admin-edit-input" id="city" placeholder={this.state.state ? this.state.state : "State"} />
             </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">Square Feet</label>
-            <div className="col-sm-10">
-              <input onChange={this.handleFeet} type="feet" className="form-control" id="feet" placeholder={this.state.feet ? this.state.feet : "0"} />
+            <div>
+              <label className="admin-edit-lbl">Year Acquired</label>
+              <input onChange={this.handleAcquired} type="aqcuired" className="admin-edit-input" id="aqcuired" placeholder={this.state.acquired ? this.state.acquired : "2000"} />
             </div>
-          </div>
-          <div className="form-group row">
-            <div className="col-sm-10">
-              <button type="submit" className="btn btn-primary">Submit</button>
+            <div>
+              <label className="admin-edit-lbl">Square Feet</label>
+              <input onChange={this.handleFeet} type="feet" className="admin-edit-input" id="feet" placeholder={this.state.feet ? this.state.feet : "0"} />
             </div>
-          </div>
-        </form>
+            <div>
+                <button id="admin-edit-btn" type="submit" className="btn">Update</button>
+            </div>
+          </form>
+          <form>
+            <label className="admin-edit-lbl">Update Photo</label>
+            <input onChange={this.updateImg} accept="application/x-zip-compressed,image/*" name="img" type="file" />
+            <button id="admin-edit-btn" type="submit" className="btn">Update</button>
+          </form>
+          <form>
+            <label className="admin-edit-lbl">Update Thumbnail</label>
+            <input name="bar" type="file" />
+            <button id="admin-edit-btn" type="submit" className="btn">Update</button>
+          </form>
+        </div>
       </div>
     )
   }
@@ -130,6 +146,9 @@ const mapDispatch = (dispatch) => {
     handleSubmit (property) {
       dispatch(updateProperty(property))
     },
+    updateImg (file) {
+      dispatch(updateImg(file))
+    }
   }
 }
 

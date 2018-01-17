@@ -39,6 +39,114 @@ body {
     color: black;
   }
 
+  #login-bg {
+    background-image: url('/img/bg.jpg');
+    background-position:  center center;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    padding: 20vh 35vw;
+  }
+
+  #login {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2vh 5vw;
+    min-height: 40vh;
+    width: 30vw;
+  }
+
+  #login-logo {
+    width: 6vw;
+    margin-left: 7vw;
+  }
+
+  .login-input {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.0);
+    border-bottom: black 1px solid;
+    display: block;
+    width: 20vw;
+    font-size: 2vw;
+  }
+
+  .login-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: black;
+  }
+  .login-input::-moz-placeholder { /* Firefox 19+ */
+    color: black;
+  }
+  .login-input:-ms-input-placeholder { /* IE 10+ */
+    color: black;
+  }
+  .login-input:-moz-placeholder { /* Firefox 18- */
+    color: black;
+  }
+
+  #login-btn {
+    width: 6vw;
+    margin-left: 6vw;
+    background-color: rgba(255, 255, 255, 0.0);
+    border: 1px solid black;
+    font-size: 1.5vw;
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+  }
+
+  #login-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  #admin-edit-img {
+    background-position:  center center;
+    background-size: cover;
+    height: 30vh;
+    margin: 0;
+    opacity: 0.5;
+  }
+
+  #edit-container {
+    width: 80vw;
+    margin: 5vh 10vw;
+  }
+
+  .admin-edit-lbl {
+    width: 10vw;
+    margin-right: 1vw;
+    margin-bottom: 2vh;
+    font-size: 1vw;
+  }
+
+  .admin-edit-input {
+    padding: 1vh 1vw 1vh 0;
+    width: 10vw;
+    margin-right: 1vw;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.0);
+    border-bottom: black 1px solid;
+    box-shadow: none;
+    border-radius: 0;
+    display: block;
+    font-size: 1vw;
+  }
+
+  #admin-edit-btn {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+  }
+
+  #admin-edit-btn:hover {
+    background-color: rgba(0, 0, 0, 1);
+    color: white;
+  }
+
+  #edit-property {
+    position: absolute;
+    left: 35vw;
+    top: 10vh;
+    font-size: 4vw;
+    text-transform: uppercase;
+  }
+
   #landing {
     background-image: url('/img/bg.jpg');
     background-position:  center center;

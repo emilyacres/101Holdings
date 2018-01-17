@@ -83,7 +83,7 @@ class About extends React.Component {
             <textarea onChange={this.handleMessage} type="message" id="contact-message" className="form-control contact-input" placeholder="" />
             <button id="contact-btn" type="submit">Send</button>
           </form>
-          <h4 id="valid-email" className="red hide bold">Please enter a valid email address</h4>
+          <h4 id="valid-email" className="hide">Please enter a valid email address</h4>
           <div id="thank-you" className="">
             <h4>Thank you for your message, we'll get back to you soon.</h4>
           </div>

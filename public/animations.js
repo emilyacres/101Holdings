@@ -1,7 +1,7 @@
-$( document ).ready(function () {
-  $( "#nav-filter" ).click(function () {
-    $("#filters").toggle();
-  });
+// $( document ).ready(function () {
+//   $( "#nav-filter" ).click(function () {
+//     $("#filters").toggle();
+//   });
 
   // $('#down-arrow').hover(function () {
 
@@ -27,4 +27,4 @@ $( document ).ready(function () {
   //   $('#contact-form').addClass("hide");
   //   $('#thank-you').removeClass("hide");
   // })
-})
+//})

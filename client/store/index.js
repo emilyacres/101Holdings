@@ -12,3 +12,4 @@ export default store
 export * from './user'
 export * from './property'
 export * from './contact'
+export * from './upload'

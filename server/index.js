@@ -10,8 +10,9 @@ const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
-const socketio = require('socket.io')
+const socketio = require('socket.io');
 module.exports = app
+
 
 /**
  * In your development environment, you can keep all of your
@@ -36,7 +37,7 @@ const createApp = () => {
 
   // body parsing middleware
   app.use(bodyParser.json())
-  app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(bodyParser.urlencoded({ parameterLimit: 100000, limit: '50mb', extended: true }))
 
   // compression middleware
   app.use(compression())
@@ -57,6 +58,7 @@ const createApp = () => {
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
+
 
   // sends index.html
   app.use('*', (req, res) => {

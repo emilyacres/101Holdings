@@ -7,6 +7,7 @@ router.use('/properties', require('./properties'));
 
 router.use('/contact', require('./contact'));
 
+router.use('/upload', require('./upload'));
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
