@@ -219,7 +219,6 @@ body {
   }
 
   #filters {
-    display: none;
 
     input {
       width: 15vw;
@@ -279,8 +278,10 @@ body {
   }
 
   #close-img {
-    text-align: right;
-    padding: 1vw;
+    position: relative;
+    margin-left: 74vw;
+    margin-top: 1vh;
+    width: 3.5vw;
     opacity: 1 !important;
   }
 
@@ -529,11 +530,10 @@ body {
     }
 
   #close-about {
-    margin-top: 2vh;
-    width: 3vw;
-    float: right;
-    cursor: pointer;
-    color: black;
+      position: absolute;
+      top: 3vh;
+      right: 7vw;
+      width: 8vw;
   }
 
   #about-title {

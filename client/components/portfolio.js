@@ -30,6 +30,7 @@ class Portfolio extends React.Component {
     this.showMenu = this.showMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.showMobileFilters = this.showMobileFilters.bind(this);
+    this.toggleFilters = this.toggleFilters.bind(this);
 
   }
 
@@ -83,12 +84,14 @@ class Portfolio extends React.Component {
     let fullImgDiv = document.getElementById("full-img");
     let classes = Array.prototype.slice.call(fullImgDiv.classList);
 
+    //create text nodes for hover state
+    let name = document.createTextNode(propertyData.name);
+    let city = document.createTextNode(propertyData.city + ', ' + propertyData.state)
+    let acquired = document.createTextNode("Acquired " + propertyData.acquired);
+    let feet = document.createTextNode(propertyData.feet + " Sq ft.");
+
     if (classes.includes("hide")) {
-      //create text nodes for hover state
-      let name = document.createTextNode(propertyData.name);
-      let city = document.createTextNode(propertyData.city + ', ' + propertyData.state)
-      let acquired = document.createTextNode(propertyData.acquired);
-      let feet = document.createTextNode(propertyData.feet + " Sq ft.");
+
       //add text node to proper places
       document.getElementById("full-img-name").appendChild(name);
       document.getElementById("full-img-city").appendChild(city);
@@ -102,6 +105,22 @@ class Portfolio extends React.Component {
       fullImgDiv.classList.add("propertyId" + propertyId);
 
 
+    } else {
+      //clear out old text nodes
+      document.getElementById("full-img-name").innerHTML = "";
+      document.getElementById("full-img-city").innerHTML = "";
+      document.getElementById("full-img-acquired").innerHTML = "";
+      document.getElementById("full-img-feet").innerHTML = "";
+      //add updated text nodes
+      document.getElementById("full-img-name").appendChild(name);
+      document.getElementById("full-img-city").appendChild(city);
+      document.getElementById("full-img-acquired").appendChild(acquired);
+      document.getElementById("full-img-feet").appendChild(feet);
+
+      fullImgDiv.style.backgroundImage = "url(img/" + fullImg + ")";
+      document.getElementById("nav").scrollIntoView({behavior: "smooth", block: "start"})
+
+      fullImgDiv.classList.add("propertyId" + propertyId);
     }
   }
 
@@ -147,6 +166,18 @@ class Portfolio extends React.Component {
     }
   }
 
+  toggleFilters () {
+    let filters = document.getElementById("filters");
+    let classes = Array.prototype.slice.call(filters.classList)
+    console.log(filters);
+    console.log(classes)
+    if ( classes.includes("hide") ) {
+      filters.classList.remove("hide");
+    } else {
+      filters.classList.add("hide");
+    }
+  }
+
   render () {
     return (
       <div>
@@ -168,18 +199,18 @@ class Portfolio extends React.Component {
               <img src="img/menu.png" id="mobile-menu" onClick={this.showMenu} />
             </div>
             <div id="nav" className="desktop">
-              <h3 id="nav-filter">Filter</h3>
+              <h3 id="nav-filter" onClick={this.toggleFilters}>Filter</h3>
               <img onClick={this.scrollUp} id="nav-logo" src="img/logo-black.png" />
               <Link id="nav-contact-link" to="/about"><h3 id="nav-contact">About</h3></Link>
             </div>
-            <div id="filters">
+            <div id="filters" className="hide">
               <input onChange={this.handleCity} type="city" className="form-control" id="filter-city" placeholder="City" />
               <input onChange={this.handleState} type="state" className="form-control" id="filter-state" placeholder="State" />
               <input onChange={this.handleZip} type="zip" className="form-control" id="filter-zip" placeholder="Zip Code" />
             </div>
             <div id="full-img" className="hide">
               <div id="full-img-hover">
-                <h4 onClick={this.closeImg} id="close-img">x</h4>
+                <img src="img/x.png" onClick={this.closeImg} id="close-img" />
                 <h4 id="full-img-name" className="bold"></h4>
                 <h4 id="full-img-city"></h4>
                 <h4 id="full-img-acquired"></h4>
