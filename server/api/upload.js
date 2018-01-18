@@ -9,11 +9,10 @@ var storage = multer.diskStorage({
     cb(null, new Date().toISOString() + file.originalname)
   }
 })
-//var upload = multer({dest: __dirname + '/public'}).single('image')
+
 var upload = multer({storage: storage})
 
 router.post('/thumb/:propertyid', upload.single('img'), function(req, res) {
-  //console.log("params", req.params)
   Property.update({
       thumb: req.file.filename
     }, {
@@ -21,14 +20,12 @@ router.post('/thumb/:propertyid', upload.single('img'), function(req, res) {
       id: req.params.propertyid,
     }
   }).then(updatedProperty => {
-    res.send("updatedProperty" + updatedProperty);
+    res.redirect('/admin/' + updatedProperty)
   })
-  //console.log("file************", req.file)
 });
 
 
 router.post('/:propertyid', upload.single('img'), function(req, res) {
-  //console.log("params", req.params)
   Property.update({
       img: req.file.filename
     }, {
@@ -36,14 +33,9 @@ router.post('/:propertyid', upload.single('img'), function(req, res) {
       id: req.params.propertyid,
     }
   }).then(updatedProperty => {
-    res.send("updatedProperty" + updatedProperty);
+        res.redirect('/admin/' + updatedProperty)
   })
-  //console.log("file************", req.file)
 });
 
-router.post('/', upload.single('img'), function(req, res) {
-  console.log("body", req.body)
-  console.log("file************", req.file)
-});
 
 module.exports = router

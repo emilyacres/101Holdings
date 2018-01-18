@@ -19,7 +19,8 @@ class Portfolio extends React.Component {
       properties: props.properties,
       city: "",
       state: "",
-      zip: ""
+      zip: "",
+      id: ""
     }
 
     this.handleCity = this.handleCity.bind(this);
@@ -31,6 +32,8 @@ class Portfolio extends React.Component {
     this.closeMenu = this.closeMenu.bind(this);
     this.showMobileFilters = this.showMobileFilters.bind(this);
     this.toggleFilters = this.toggleFilters.bind(this);
+    this.leftArrow = this.leftArrow.bind(this);
+    this.rightArrow = this.rightArrow.bind(this);
 
   }
 
@@ -114,7 +117,9 @@ class Portfolio extends React.Component {
       fullImgDiv.classList.remove("hide");
       fullImgDiv.style.backgroundImage = "url(img/" + fullImg + ")";
       document.getElementById("nav").scrollIntoView({behavior: "smooth", block: "start"})
-
+      this.setState({
+        id: propertyId
+      })
       fullImgDiv.classList.add("propertyId" + propertyId);
 
 
@@ -132,6 +137,10 @@ class Portfolio extends React.Component {
 
       fullImgDiv.style.backgroundImage = "url(img/" + fullImg + ")";
       document.getElementById("nav").scrollIntoView({behavior: "smooth", block: "start"})
+
+      this.setState({
+        id: propertyId
+      })
 
       fullImgDiv.classList.add("propertyId" + propertyId);
     }
@@ -153,11 +162,92 @@ class Portfolio extends React.Component {
     document.getElementById(propertyId).scrollIntoView({behavior: "smooth", block: "start"})
   }
 
+  leftArrow () {
+    let currentProp = this.state.properties.filter(prop => prop.id === this.state.id)[0];
+    let currentIdx = this.state.properties.indexOf(currentProp);
+    let nextProp;
+    if(currentIdx === 0) {
+      nextProp = this.state.properties[this.state.properties.length-1];
+    } else {
+      nextProp = this.state.properties[currentIdx-1]
+    }
+
+    let fullImg = nextProp.img;
+    let fullImgDiv = document.getElementById("full-img");
+
+    //create text nodes for hover state
+    let name = document.createTextNode(nextProp.name);
+    let city = document.createTextNode(nextProp.city + ', ' + nextProp.state)
+    let acquired = document.createTextNode("Acquired " + nextProp.acquired);
+    let feet = document.createTextNode(nextProp.feet + " Sq ft.");
+
+    //clear out old text nodes
+    document.getElementById("full-img-name").innerHTML = "";
+    document.getElementById("full-img-city").innerHTML = "";
+    document.getElementById("full-img-acquired").innerHTML = "";
+    document.getElementById("full-img-feet").innerHTML = "";
+    //add updated text nodes
+    document.getElementById("full-img-name").appendChild(name);
+    document.getElementById("full-img-city").appendChild(city);
+    document.getElementById("full-img-acquired").appendChild(acquired);
+    document.getElementById("full-img-feet").appendChild(feet);
+
+    fullImgDiv.style.backgroundImage = "url(img/" + fullImg + ")";
+    document.getElementById("nav").scrollIntoView({behavior: "smooth", block: "start"})
+
+    fullImgDiv.classList.add("propertyId" + nextProp.id);
+
+    this.setState({
+      id: nextProp.id
+    })
+  }
+
+  rightArrow () {
+    let currentProp = this.state.properties.filter(prop => prop.id === this.state.id)[0];
+    let currentIdx = this.state.properties.indexOf(currentProp);
+    let nextProp;
+    if(currentIdx === this.state.properties.length-1) {
+      nextProp = this.state.properties[0];
+    } else {
+      nextProp = this.state.properties[currentIdx+1]
+    }
+
+    let fullImg = nextProp.img;
+    let fullImgDiv = document.getElementById("full-img");
+
+    //create text nodes for hover state
+    let name = document.createTextNode(nextProp.name);
+    let city = document.createTextNode(nextProp.city + ', ' + nextProp.state)
+    let acquired = document.createTextNode("Acquired " + nextProp.acquired);
+    let feet = document.createTextNode(nextProp.feet + " Sq ft.");
+
+    //clear out old text nodes
+    document.getElementById("full-img-name").innerHTML = "";
+    document.getElementById("full-img-city").innerHTML = "";
+    document.getElementById("full-img-acquired").innerHTML = "";
+    document.getElementById("full-img-feet").innerHTML = "";
+    //add updated text nodes
+    document.getElementById("full-img-name").appendChild(name);
+    document.getElementById("full-img-city").appendChild(city);
+    document.getElementById("full-img-acquired").appendChild(acquired);
+    document.getElementById("full-img-feet").appendChild(feet);
+
+    fullImgDiv.style.backgroundImage = "url(img/" + fullImg + ")";
+    document.getElementById("nav").scrollIntoView({behavior: "smooth", block: "start"})
+
+    fullImgDiv.classList.add("propertyId" + nextProp.id);
+
+    this.setState({
+      id: nextProp.id
+    })
+  }
+
   showMenu () {
     document.getElementById("mobile-menu-list").classList.remove("hide")
   }
 
   closeMenu (event) {
+    //close menu when 'enter' is hit on filters
     if( event.key && event.key !== "Enter" ) {
       return;
     }
@@ -222,6 +312,7 @@ class Portfolio extends React.Component {
               <input onChange={this.handleZip} type="zip" className="form-control" id="filter-zip" placeholder="Zip Code" />
             </div>
             <div id="full-img" className="hide">
+              <img onClick={this.leftArrow} id="left-arrow" src="img/left-arrow.png" />
               <div id="full-img-hover">
                 <img src="img/x.png" onClick={this.closeImg} id="close-img" />
                 <h4 id="full-img-name" className="bold"></h4>
@@ -229,6 +320,7 @@ class Portfolio extends React.Component {
                 <h4 id="full-img-acquired"></h4>
                 <h4 id="full-img-feet"></h4>
               </div>
+              <img onClick={this.rightArrow} id="right-arrow" src="img/right-arrow.png" />
             </div>
             {this.state.properties && this.state.filteredProperties.map(property => {
               return <div onClick={this.expandImg.bind(this, property.id)} key={property.id} id={property.id} className="property-tile" style={{backgroundImage: 'url(img/' + property.thumb + ')', backgroundPosition:  'center center',

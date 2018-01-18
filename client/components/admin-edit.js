@@ -29,8 +29,6 @@ class AdminEdit extends React.Component {
     this.handleZip = this.handleZip.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.dispatchSubmit = props.handleSubmit.bind(this);
-    this.updateImg = this.updateImg.bind(this);
-    this.dispatchImg = props.updateImg.bind(this);
 
   }
 
@@ -98,10 +96,7 @@ class AdminEdit extends React.Component {
   handleSubmit (event) {
     this.dispatchSubmit(this.state);
   }
-  updateImg (event) {
-    history.push('/admin/' + this.state.id)
-    //this.dispatchImg(event.target.files[0])
-  }
+
   render () {
 
     return (
@@ -135,18 +130,20 @@ class AdminEdit extends React.Component {
               <input onChange={this.handleZip} type="zip" className="admin-edit-input" id="zip" placeholder={this.state.zip ? this.state.zip : "10003"} />
             </div>
             <div>
-                <button id="admin-edit-btn" type="submit" className="btn">Update</button>
+                <button id="admin-edit-btn" type="submit" className="btn">Update information</button>
             </div>
           </form>
-          <form action={`/api/upload/${this.state.id}`} method="post" encType="multipart/form-data">
+          <form className="upload-photo" action={`/api/upload/${this.state.id}`} method="post" encType="multipart/form-data">
             <label className="admin-edit-lbl">Update Photo</label>
+            <p className="img-sub">This should be a landscape photo (approx. 1920 x 1080)</p>
             <input accept="application/x-zip-compressed,image/*" name="img" type="file" />
-            <input type="submit" value="Upload new image" />
+            <input id="admin-edit-btn" className="btn" type="submit" value="Upload new image" />
           </form>
-          <form action={`/api/upload/thumb/${this.state.id}`} method="post" encType="multipart/form-data">
+          <form className="upload-photo" action={`/api/upload/thumb/${this.state.id}`} method="post" encType="multipart/form-data">
             <label className="admin-edit-lbl">Update Thumbnail</label>
+            <p className="img-sub">This should be a square photo (approx. 600 x 600)</p>
             <input accept="application/x-zip-compressed,image/*" name="img" type="file" />
-            <input type="submit" value="Upload new thumbnail" />
+            <input id="admin-edit-btn" className="btn" type="submit" value="Upload new thumbnail" />
           </form>
         </div>
       </div>
@@ -172,9 +169,6 @@ const mapDispatch = (dispatch) => {
     handleSubmit (property) {
       dispatch(updateProperty(property))
     },
-    updateImg (file) {
-      dispatch(updateImg(file))
-    }
   }
 }
 
