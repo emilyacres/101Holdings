@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import { logout, updateProperty, updateImg } from '../store'
+import { history } from "../history"
 
 
 class AdminEdit extends React.Component {
@@ -19,6 +20,7 @@ class AdminEdit extends React.Component {
       thumb: "",
       id: props.match.params.id,
     };
+
     this.handleName = this.handleName.bind(this);
     this.handleCity = this.handleCity.bind(this);
     this.handleState = this.handleState.bind(this);
@@ -29,7 +31,7 @@ class AdminEdit extends React.Component {
     this.dispatchSubmit = props.handleSubmit.bind(this);
     this.updateImg = this.updateImg.bind(this);
     this.dispatchImg = props.updateImg.bind(this);
-    //this.properties = props.properties;
+
   }
 
   componentWillReceiveProps (nextProps) {
@@ -94,19 +96,11 @@ class AdminEdit extends React.Component {
     })
   }
   handleSubmit (event) {
-
     this.dispatchSubmit(this.state);
   }
   updateImg (event) {
-    event.preventDefault();
-    console.log(typeof event.target)
-    console.log(event.target.files[0])
-    // this.setState({
-    //   img: event.target.files[0],
-    // })
-    let data = {};
-    data.img = event.target.files[0]
-    this.dispatchImg(event.target.files[0])
+    history.push('/admin/' + this.state.id)
+    //this.dispatchImg(event.target.files[0])
   }
   render () {
 
@@ -144,15 +138,15 @@ class AdminEdit extends React.Component {
                 <button id="admin-edit-btn" type="submit" className="btn">Update</button>
             </div>
           </form>
-          <form>
+          <form action={`/api/upload/${this.state.id}`} method="post" encType="multipart/form-data">
             <label className="admin-edit-lbl">Update Photo</label>
-            <input onChange={this.updateImg} accept="application/x-zip-compressed,image/*" name="img" type="file" />
-            <button id="admin-edit-btn" type="submit" className="btn">Update</button>
+            <input accept="application/x-zip-compressed,image/*" name="img" type="file" />
+            <input type="submit" value="Upload new image" />
           </form>
-          <form>
+          <form action={`/api/upload/thumb/${this.state.id}`} method="post" encType="multipart/form-data">
             <label className="admin-edit-lbl">Update Thumbnail</label>
-            <input name="bar" type="file" />
-            <button id="admin-edit-btn" type="submit" className="btn">Update</button>
+            <input accept="application/x-zip-compressed,image/*" name="img" type="file" />
+            <input type="submit" value="Upload new thumbnail" />
           </form>
         </div>
       </div>

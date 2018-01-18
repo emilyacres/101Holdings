@@ -44,7 +44,6 @@ User.encryptPassword = function (plainText, salt) {
  */
 const setSaltAndPassword = user => {
   //if(Array.isArray(user)) user = user[0];
-  console.log("###############USER", user)
   if (user.changed('password')) {
     user.salt = User.generateSalt()
     user.password = User.encryptPassword(user.password, user.salt)
