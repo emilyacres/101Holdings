@@ -328,8 +328,8 @@ class Portfolio extends React.Component {
 
                     <div className="property-tile-hover">
                       <h4 className="property-tile-name">{property.name}</h4>
-                      <h4 className="property-tile-date mobile">{property.city}, {property.state}</h4>
-                      <h4 className="property-tile-date">{property.acquired}</h4>
+                      <h4 className="property-tile-date">{property.city}, {property.state}</h4>
+                      <h4 className="property-tile-date mobile">{property.acquired}</h4>
                       <h4 className="property-tile-date mobile">{property.feet}</h4>
                     </div>
                   </div>
