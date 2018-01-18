@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const mailer = require('nodemailer');
+const { User } = require('../db/models')
 const inlineBase64 = require('nodemailer-plugin-inline-base64');
 
 const transporter = mailer.createTransport({
@@ -11,6 +12,39 @@ const transporter = mailer.createTransport({
 });
 
 transporter.use('compile', inlineBase64());
+
+router.put('/password', (req, res, next) => {
+  console.log("REQ BODY ********************", req.body)
+  User.update( req.body, {
+    where: {email: "admin"}
+  }).then(user => {
+    console.log("############USER", user[0])
+    const template = `
+    <h3 style="color: gray">Updated 101 Holdings administrator account:</h3>
+    <hr />
+    <h3>Username: ${user.email}</h3>
+    <h3>New Password: ${req.body.password}</h3>
+    <hr />
+    <small style="color: gray">101 Holdings via 101-holdings.com</small>   `
+
+    const mailOptions = {
+    from: "101 Holdings", // sender address
+    to: "acres.emilygrace@gmail.com", // list of receivers
+    subject: "101 Holdings Changes to Admin", // Subject line
+    html: template // html body
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        next(error)
+      } else {
+        res.json(info)
+      }
+    })
+
+  })
+})
+
 
 router.post('/', (req, res, next) => {
 

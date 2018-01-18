@@ -1,14 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { auth } from '../store'
+import { auth, sendPassword } from '../store'
 import history from '../history'
 
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const {name, displayName, handleSubmit, error} = props
+  const {name, displayName, handleSubmit, emailPassword, error} = props
   return (
     <div id="login-bg">
       <div id="login">
@@ -20,6 +20,7 @@ const AuthForm = (props) => {
           <div>
             <input className="login-input" placeholder="Password" name='password' type='password' />
           </div>
+
           <div>
             <button id="login-btn" type='submit'>Login</button>
           </div>
@@ -49,13 +50,16 @@ const mapSignup = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleSubmit (evt) {
-      evt.preventDefault()
+    handleSubmit (event) {
+      event.preventDefault()
       const formName = 'login'
-      const email = evt.target.email.value
-      const password = evt.target.password.value
+      const email = event.target.email.value
+      const password = event.target.password.value
       dispatch(auth(email, password, formName))
-    }
+    },
+    emailPassword (event) {
+      dispatch(sendPassword())
+    },
   }
 }
 

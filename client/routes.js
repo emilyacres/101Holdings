@@ -4,7 +4,7 @@ import { Router } from 'react-router'
 import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, Admin, AdminEdit, Home, About } from './components'
+import { Main, Login, Signup, UserHome, Admin, AdminEdit, AdminNew, Home, About } from './components'
 import { me, allProperties } from './store'
 
 /**
@@ -24,12 +24,12 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path='/login' component={Login} />
             <Route path='/about' component={About} />
-            <Route path='/' component={Home} />
 
             {
               isLoggedIn &&
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
+                  <Route path='/admin/new' component={AdminNew} />
                   <Route path='/admin/:id' component={AdminEdit} />
                   <Route path='/admin' component={Admin} />
                 </Switch>

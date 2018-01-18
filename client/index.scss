@@ -82,6 +82,14 @@ body {
     color: black;
   }
 
+  #forgot {
+    margin-top: 2vh;
+    color: red;
+    font-style: italic;
+    text-align: right;
+    cursor: pointer;
+  }
+
   #login-btn {
     width: 6vw;
     margin-left: 6vw;

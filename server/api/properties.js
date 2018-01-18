@@ -14,6 +14,16 @@ router.put('/:propertyid', upload.single('img'), (req, res, next) => {
   })
 })
 
+router.post('/', (req, res, next) => {
+  Property.create(req.body, {
+    where: {
+      id: req.params.propertyid,
+    }
+  }).then(newProperty => {
+    res.json(newProperty);
+  })
+})
+
 
 router.get('/', (req, res, next) => {
   Property.findAll({

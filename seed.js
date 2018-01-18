@@ -9,10 +9,10 @@ var data = {
       {email: "admin", password: "admin"},
     ],
   properties: [
-      {name: "145 Greene Street", city: "New York", state: "New YorK", zip: "00000", acquired: "09.2013", feet: 2747, img: "bg.jpg", thumb: "square.jpg"},
-      {name: "Philip House", city: "New York", state: "New YorK", zip: "00000", acquired: "02.2014", feet: 9045, img: "bg.jpg", thumb: "square.jpg"},
+      {name: "145 Greene Street", city: "New York", state: "New York", zip: "00000", acquired: "09.2013", feet: 2747, img: "bg.jpg", thumb: "square.jpg"},
+      {name: "Philip House", city: "New York", state: "New York", zip: "00000", acquired: "02.2014", feet: 9045, img: "bg.jpg", thumb: "square.jpg"},
       {name: "The Shops at the Bravern", city: "Bravern", state: "Washington", zip: "00000", acquired: "03.2012", feet: 310000, img: "bg.jpg", thumb: "square.jpg"},
-      {name: "555 Grand Concourse", city: "Bronx", state: "New YorK", zip: "00000", acquired: "01.2011", feet: 3440, img: "bg.jpg", thumb: "square.jpg"},
+      {name: "555 Grand Concourse", city: "Bronx", state: "New York", zip: "00000", acquired: "01.2011", feet: 3440, img: "bg.jpg", thumb: "square.jpg"},
       {name: "Miami Design District", city: "Miami", state: "Florida", zip: "00000", acquired: "09.2014", feet: 1000000, img: "bg.jpg", thumb: "square.jpg"},
    ],
 };

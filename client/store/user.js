@@ -47,6 +47,14 @@ export const logout = () =>
       })
       .catch(err => console.log(err))
 
+export const sendPassword = (password) =>
+  dispatch =>
+    axios.put('/api/contact/password', password)
+      .then(res => {
+        dispatch(removeUser())
+        history.push('/login')
+      })
+      .catch(err => console.log(err))
 /**
  * REDUCER
  */

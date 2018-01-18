@@ -41,6 +41,18 @@ export const updateProperty = (property) =>
       })
       .catch(err => console.log(err))
 
+export const newProperty = (property) =>
+  dispatch =>
+    axios.post(`/api/properties/`, property )
+      .then(res => {
+        console.log(res.data)
+        return axios.get('/api/properties')
+      })
+      .then( res => {
+        dispatch(updateProperties(res.data || defaultProperties))
+      })
+      .catch(err => console.log(err))
+
 
 /**
  * REDUCER

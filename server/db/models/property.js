@@ -29,11 +29,11 @@ const Property = db.define('property', {
   },
   img: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   thumb: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   }
 })
 
