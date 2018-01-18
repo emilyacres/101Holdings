@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import { logout, newProperty, updateImg } from '../store'
+import History from '../history'
 
 
 class AdminNew extends React.Component {
@@ -17,6 +18,7 @@ class AdminNew extends React.Component {
       zip: "",
       img: "",
       thumb: "",
+      id: null
     };
     this.handleName = this.handleName.bind(this);
     this.handleCity = this.handleCity.bind(this);
@@ -26,8 +28,22 @@ class AdminNew extends React.Component {
     this.handleZip = this.handleZip.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.dispatchSubmit = props.handleSubmit.bind(this);
-    this.newImg = this.newImg.bind(this);
+    //this.newImg = this.newImg.bind(this);
     this.dispatchImg = props.updateImg.bind(this);
+    this.addImg = this.addImg.bind(this);
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if(this.props.properties.length && nextProps.properties.length > this.props.properties.length) {
+      let property = nextProps.properties.filter( property => {
+        return property.name === this.state.name;
+      })[0]
+      console.log(property)
+      this.setState({
+        id: property.id
+      })
+      console.log(this.state)
+    }
   }
 
   handleName (event) {
@@ -64,9 +80,11 @@ class AdminNew extends React.Component {
     event.preventDefault();
     this.dispatchSubmit(this.state);
   }
-  newImg (event) {
-    event.preventDefault();
+
+  addImg (event) {
+    History.push('/admin/' + this.state.id);
   }
+
   render () {
 
     return (
@@ -103,16 +121,7 @@ class AdminNew extends React.Component {
                 <button id="admin-edit-btn" type="submit" className="btn">Submit</button>
             </div>
           </form>
-          <form>
-            <label className="admin-edit-lbl">Submit Photo</label>
-            <input onChange={this.newImg} accept="application/x-zip-compressed,image/*" name="img" type="file" />
-            <button id="admin-edit-btn" type="submit" className="btn">Submit</button>
-          </form>
-          <form>
-            <label className="admin-edit-lbl">Submit Thumbnail</label>
-            <input name="bar" type="file" />
-            <button id="admin-edit-btn" type="submit" className="btn">Submit</button>
-          </form>
+          <button onClick={this.addImg}>add images</button>
         </div>
       </div>
     )

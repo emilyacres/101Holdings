@@ -45,7 +45,6 @@ export const newProperty = (property) =>
   dispatch =>
     axios.post(`/api/properties/`, property )
       .then(res => {
-        console.log(res.data)
         return axios.get('/api/properties')
       })
       .then( res => {
