@@ -58,11 +58,12 @@ class Admin extends React.Component {
   render () {
     return (
       <div>
-        <h1>Admin Page</h1>
+        <img src="/img/logo-black.png" id="admin-logo" />
+        <h1 id="admin-header">Properties</h1>
+        <Link to="/admin/new"><button className="btn" id="new-prop-btn">+ New Property</button></Link>
         {this.state.properties.map(property => {
-          return <Link key={property.id} to={`/admin/${property.id}`}><div>{property.name}</div></Link>
+          return <div key={property.id} className="admin-properties"><h3 className="admin-prop-name">{property.name}</h3><Link  to={`/admin/${property.id}`}><button className="btn admin-prop-btn" id="admin-edit-btn">edit</button></Link></div>
         })}
-        <Link to="/admin/new"><button className="btn" id="admin-edit-btn">New Property</button></Link>
         <form className="hide" onSubmit={this.updatePassword}>
           <div>
             <label className="admin-edit-lbl">New Password</label>

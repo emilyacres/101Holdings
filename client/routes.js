@@ -32,6 +32,7 @@ class Routes extends Component {
                   <Route path='/admin/new' component={AdminNew} />
                   <Route path='/admin/:id' component={AdminEdit} />
                   <Route path='/admin' component={Admin} />
+                  <Route path='/' component={Home} />
                 </Switch>
             }
             {/* Displays our Login component as a fallback */}

@@ -29,8 +29,11 @@ class AdminEdit extends React.Component {
     this.dispatchSubmit = props.handleSubmit.bind(this);
     this.updateImg = this.updateImg.bind(this);
     this.dispatchImg = props.updateImg.bind(this);
+    //this.properties = props.properties;
   }
+
   componentWillReceiveProps (nextProps) {
+    console.log("recieved props")
     const property = nextProps.properties.filter( el => el.id == this.state.id)[0]
     this.setState({
       name: property.name,
@@ -38,10 +41,28 @@ class AdminEdit extends React.Component {
       state: property.state,
       acquired: property.acquired,
       feet: property.feet,
+      zip: property.zip,
       img: property.img,
       thumb: property.thumb,
     })
   }
+
+  componentDidMount () {
+    if (this.props.properties.length) {
+      const property = this.props.properties.filter( el => el.id == this.state.id)[0]
+      this.setState({
+        name: property.name,
+        city: property.city,
+        state: property.state,
+        acquired: property.acquired,
+        feet: property.feet,
+        zip: property.zip,
+        img: property.img,
+        thumb: property.thumb,
+      })
+    }
+  }
+
   handleName (event) {
     this.setState({
       name: event.target.value,
@@ -73,7 +94,7 @@ class AdminEdit extends React.Component {
     })
   }
   handleSubmit (event) {
-    event.preventDefault();
+
     this.dispatchSubmit(this.state);
   }
   updateImg (event) {

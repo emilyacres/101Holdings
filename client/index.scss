@@ -104,6 +104,49 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
   }
 
+  #admin-header {
+    text-align: center;
+    margin-top: -3vh;
+    margin-bottom: 3vh;
+  }
+
+  #admin-logo {
+    width: 10vw;
+    margin-left: 45vw;
+  }
+
+  .admin-prop-name {
+    float: left;
+  }
+
+  .admin-prop-btn {
+    margin-left: 1vw;
+    float: right;
+    margin-top: 2vh;
+  }
+
+  #new-prop-btn {
+    width: 10vw;
+    margin-left: 45vw;
+    background-color: red;
+    opacity: 0.8;
+    color: white;
+    font-size: 1.2vw;
+    margin-bottom: 3vh;
+  }
+
+  #new-prop-btn:hover {
+    opacity: 1;
+  }
+
+  .admin-properties {
+    text-align: left;
+    display: block;
+    clear: both;
+    width: 30vw;
+    margin-left: 35vw;
+  }
+
   #admin-edit-img {
     background-position:  center center;
     background-size: cover;
