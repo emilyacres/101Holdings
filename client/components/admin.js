@@ -58,7 +58,7 @@ class Admin extends React.Component {
   render () {
     return (
       <div>
-        <img src="/img/logo-black.png" id="admin-logo" />
+        <Link to="/"><img src="/img/logo-black.png" id="admin-logo" /></Link>
         <h1 id="admin-header">Properties</h1>
         <Link to="/admin/new"><button className="btn" id="new-prop-btn">+ New Property</button></Link>
         {this.state.properties.map(property => {

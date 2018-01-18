@@ -381,29 +381,7 @@ body {
     text-align: center;
   }
 
-  /*.property-tile-full {
-    width: 79vw !important;
-    .property-tile-hover {
-      width: 100%;
-    }
 
-    img {
-      display: initial !important;
-      width: 100% !important;
-    }
-  }
-
-  .property-tile-full:hover {
-
-
-    .property-tile-name {
-      color: black !important;
-    }
-
-    .property-tile-date {
-      color: black !important;
-    }
-  }*/
 
   #about-header {
     margin-bottom: 10vh;
@@ -510,11 +488,100 @@ body {
 
 }
 
-@media (min-width: 801px) {
+
+
+
+
+
+
+
+@media (min-width: 801px) and (max-width: 2000px) {
   .mobile {
     display: none;
   }
 }
+
+
+
+
+
+
+
+
+@media (min-width: 2001px) {
+  .mobile {
+    display: none;
+  }
+
+  .property-tile {
+    width: 25vw;
+    height: 25vw;
+    margin-right: 1.7vw !important;
+    display: inline-block;
+    margin-bottom: 1.7vw;
+  }
+
+  .property-tile-name {
+    font-size: 1vw;
+  }
+
+  .property-tile-date {
+    font-size: 1vw;
+  }
+
+  #full-img-name {
+    font-size: 1vw !important;
+    margin-top: 25vh !important;
+  }
+
+  #full-img-city {
+    font-size: 1vw !important;
+  }
+
+  #full-img-acquired {
+    font-size: 1vw !important;
+  }
+
+  #full-img-feet {
+    font-size: 1vw !important;
+  }
+
+  #filters {
+    input {
+      font-size: 1vw;
+    }
+  }
+
+  #nav-contact {
+    font-size: 2vw;
+  }
+
+  #nav-filter {
+    font-size: 2vw;
+  }
+
+  #nav-logo {
+    margin-top: -2vh;
+  }
+
+  #about-container {
+    font-size: .7vw !important;
+  }
+
+  .contact-input {
+    font-size: .7vw !important;
+  }
+
+  #about-title {
+    font-size: 1.5vw !important;
+  }
+}
+
+
+
+
+
+
 
 @media (min-width: 0px) and (max-width: 800px) {
   body {

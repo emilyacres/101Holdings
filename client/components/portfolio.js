@@ -41,6 +41,17 @@ class Portfolio extends React.Component {
     })
   }
 
+  componentWillMount () {
+    var OSName="Unknown OS";
+    if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+    if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+    console.log(OSName)
+    if(document.getElementById("properties-container")) {
+      console.log(document.getElementById("properties-container"))
+      document.getElementById("properties-container").style.marginLeft = '0';
+    }
+  }
+
   handleCity (event) {
     var newProperties = this.state.properties.filter( property => {
         return property.city.toUpperCase().startsWith(event.target.value.toUpperCase())
