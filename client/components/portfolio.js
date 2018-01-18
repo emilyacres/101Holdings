@@ -41,14 +41,16 @@ class Portfolio extends React.Component {
     })
   }
 
-  componentWillMount () {
+  componentDidMount () {
     var OSName="Unknown OS";
     if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
     if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
-    console.log(OSName)
-    if(document.getElementById("properties-container")) {
-      console.log(document.getElementById("properties-container"))
-      document.getElementById("properties-container").style.marginLeft = '0';
+    if(document.getElementById("properties-container") && navigator.appVersion.indexOf("Win")!=-1) {
+      if(window.innerWidth < 1700) {
+        document.getElementById("properties-container").style.marginLeft = '8vw';
+      } else {
+        document.getElementById("properties-container").style.marginLeft = '9vw';
+      }
     }
   }
 
