@@ -52,6 +52,17 @@ export const newProperty = (property) =>
       })
       .catch(err => console.log(err))
 
+export const deleteProperty = (propertyId) =>
+  dispatch =>
+    axios.delete(`/api/properties/${propertyId}`)
+      .then(res => {
+        return axios.get('/api/properties')
+      })
+      .then( res => {
+        dispatch(updateProperties(res.data || defaultProperties))
+      })
+      .catch(err => console.log(err))
+
 
 /**
  * REDUCER

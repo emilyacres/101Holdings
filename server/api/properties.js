@@ -11,7 +11,18 @@ router.put('/:propertyid', upload.single('img'), (req, res, next) => {
     }
   }).then(updatedProperty => {
     res.json(updatedProperty);
+  }).catch(next)
+})
+
+router.delete('/:propertyid', (req, res, next) => {
+  Property.destroy({
+    where: {
+      id: req.params.propertyid
+    }
   })
+  .then(() => {
+    res.redirect('/admin')
+  }).catch(next)
 })
 
 router.post('/', (req, res, next) => {
@@ -21,7 +32,7 @@ router.post('/', (req, res, next) => {
     }
   }).then(newProperty => {
     res.json(newProperty);
-  })
+  }).catch(next)
 })
 
 
@@ -29,6 +40,6 @@ router.get('/', (req, res, next) => {
   Property.findAll({
 
   }).then(properties => {
-    res.json(properties)})
-  .catch(next)
+    res.json(properties)
+  }).catch(next)
 })

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { logout, updateProperty, updateImg } from '../store'
+import { logout, updateProperty, deleteProperty } from '../store'
 import { history } from "../history"
 
 
@@ -29,6 +29,7 @@ class AdminEdit extends React.Component {
     this.handleZip = this.handleZip.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.dispatchSubmit = props.handleSubmit.bind(this);
+    this.dispatchDelete = props.handleDelete.bind(this);
 
   }
 
@@ -96,7 +97,9 @@ class AdminEdit extends React.Component {
   handleSubmit (event) {
     this.dispatchSubmit(this.state);
   }
-
+  handleDelete (event) {
+    this.dispatchDelete(this.state.id)
+  }
   render () {
 
     return (
@@ -145,6 +148,7 @@ class AdminEdit extends React.Component {
             <input accept="application/x-zip-compressed,image/*" name="img" type="file" />
             <input id="admin-edit-btn" className="btn" type="submit" value="Upload new thumbnail" />
           </form>
+          <button id="delete-btn" className="btn btn-danger" onClick={() => {if(confirm('Are you sure you want to delete this property?')){ this.handleDelete() }}}> Delete Property</button>
         </div>
       </div>
     )
@@ -169,6 +173,9 @@ const mapDispatch = (dispatch) => {
     handleSubmit (property) {
       dispatch(updateProperty(property))
     },
+    handleDelete (property) {
+      dispatch(deleteProperty(property))
+    }
   }
 }
 

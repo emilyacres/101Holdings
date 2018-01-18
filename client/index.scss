@@ -239,6 +239,12 @@ body {
     }
   }
 
+  #delete-btn {
+    position: relative;
+    right:0;
+    margin-left: 5vw;
+  }
+
   #landing {
     background-image: url('/img/bg.jpg');
     background-position:  center center;
