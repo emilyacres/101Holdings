@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "101 Holdings",
   "engines": {
-    "node": ">= 7.0.0"
+    "node": ">= 8.9.4"
   },
   "main": "index.js",
   "scripts": {
