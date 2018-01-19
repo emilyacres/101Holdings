@@ -30,6 +30,9 @@ class Home extends React.Component {
     return (
       <div>
         <div id="landing">
+          <video autoPlay muted loop id="video-bg">
+            <source src="img/bg.mp4" type="video/mp4" />
+          </video>
           <img src="img/logo-white.png" id="landing-logo" />
           <img src="img/arrow.png" id="down-arrow" onClick={this.scrollDown} />
         </div>

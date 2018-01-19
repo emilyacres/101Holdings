@@ -85,7 +85,7 @@ class About extends React.Component {
           </form>
           <h4 id="valid-email" className="hide">Please enter a valid email address</h4>
           <div id="thank-you" className="">
-            <h4>Thank you for your message, we'll get back to you soon.</h4>
+            <h4 id="thank-you-msg">Thank you.</h4>
           </div>
           <div className="about-sub">
             <p className="bold">General Inquires</p>
