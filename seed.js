@@ -6,7 +6,7 @@ const { User, Property } = require('./server/db/models')
 
 var data = {
   users: [
-      {email: "admin", password: "admin"},
+      {email: "admin", password: "1oh1admin"},
     ],
   properties: [
       {name: "841 Madison Avenue", city: "New York", state: "New York", zip: "10021", acquired: "2010", feet: 18000, img: "101holdings-841madison-full.jpg", thumb: "101holdings-841madison-thumb.jpg"},

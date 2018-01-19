@@ -29,7 +29,7 @@ router.put('/password', (req, res, next) => {
 
     const mailOptions = {
     from: "101 Holdings", // sender address
-    to: "acres.emilygrace@gmail.com", // list of receivers
+    to: "info@101-holding.com", // list of receivers
     subject: "101 Holdings Changes to Admin", // Subject line
     html: template // html body
     };
@@ -59,7 +59,7 @@ router.post('/', (req, res, next) => {
 
   const mailOptions = {
     from: `${req.body.email}`, // sender address
-    to: "acres.emilygrace@gmail.com", // list of receivers
+    to: "info@101-holdings.com", // list of receivers
     subject: `${req.body.subject}` ? `${req.body.subject}` : "New Contact Form Submission", // Subject line
     html: template // html body
   };
