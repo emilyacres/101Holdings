@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",
+    "babel-core": "^6.22.1",
     "body-parser": "^1.16.1",
     "bootstrap": "^3.3.7",
     "compression": "^1.7.1",
@@ -50,11 +51,11 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
     "sequelize": "^4.3.1",
-    "socket.io": "^2.0.3"
+    "socket.io": "^2.0.3",
+    "webpack": "^2.2.1"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.9.0",
-    "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.22.0",
@@ -73,7 +74,6 @@
     "sass-loader": "^6.0.0",
     "style-loader": "^0.13.1",
     "supertest": "^3.0.0",
-    "webpack": "^2.2.1",
     "webpack-livereload-plugin": "^1.0.0"
   }
 }
