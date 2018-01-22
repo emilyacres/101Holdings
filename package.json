@@ -2,6 +2,9 @@
   "name": "101Holdings",
   "version": "1.0.0",
   "description": "101 Holdings",
+  "repository": {
+    "private": true
+  },
   "engines": {
     "node": "8.9.4"
   },
