@@ -13,8 +13,6 @@ const app = express()
 const socketio = require('socket.io');
 const aws = require('aws-sdk');
 
-module.exports = app
-
 //configure aws
 const S3_BUCKET = process.env.S3_BUCKET || "http://one-oh-one.s3-aws-us-east-2.amazonaws.com";
 aws.config.region = 'us-east-2';
@@ -129,3 +127,5 @@ if (require.main === module) {
 } else {
   createApp()
 }
+
+module.exports = app

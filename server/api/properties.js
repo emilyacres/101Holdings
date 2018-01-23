@@ -1,8 +1,6 @@
 const router = require('express').Router()
 const { Property } = require('../db/models')
-module.exports = router
-// var multer  = require('multer')
-// var upload = multer({ dest: '../public/img/' })
+
 
 router.put('/:propertyid', (req, res, next) => {
   Property.update(req.body, {
@@ -43,3 +41,5 @@ router.get('/', (req, res, next) => {
     res.json(properties)
   }).catch(next)
 })
+
+module.exports = router
