@@ -14,7 +14,6 @@ const transporter = mailer.createTransport({
 transporter.use('compile', inlineBase64());
 
 router.put('/password', (req, res, next) => {
-  console.log("REQ BODY ********************", req.body)
   User.update( req.body, {
     where: {email: "admin"}
   }).then(user => {

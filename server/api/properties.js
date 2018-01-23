@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const { Property } = require('../db/models')
 module.exports = router
-var multer  = require('multer')
-var upload = multer({ dest: '../public/img/' })
+// var multer  = require('multer')
+// var upload = multer({ dest: '../public/img/' })
 
-router.put('/:propertyid', upload.single('img'), (req, res, next) => {
+router.put('/:propertyid', (req, res, next) => {
   Property.update(req.body, {
     where: {
       id: req.params.propertyid,

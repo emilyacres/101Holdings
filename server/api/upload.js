@@ -13,30 +13,30 @@ const router = require('express').Router()
 
 // var upload = multer({storage: storage})
 
-router.post('/thumb/:propertyid', function(req, res) {
-  Property.update({
-      thumb: req.file.filename
-    }, {
-    where: {
-      id: req.params.propertyid,
-    }
-  }).then(updatedProperty => {
-    res.redirect('/admin/' + updatedProperty)
-  })
-});
+// router.post('/thumb/:propertyid', function(req, res) {
+//   Property.update({
+//       thumb: req.file.filename
+//     }, {
+//     where: {
+//       id: req.params.propertyid,
+//     }
+//   }).then(updatedProperty => {
+//     res.redirect('/admin/' + updatedProperty)
+//   })
+// });
 
 
-router.post('/:propertyid', function(req, res) {
-  Property.update({
-      img: req.file.filename
-    }, {
-    where: {
-      id: req.params.propertyid,
-    }
-  }).then(updatedProperty => {
-        res.redirect('/admin/' + updatedProperty)
-  })
-});
+// router.post('/:propertyid', function(req, res) {
+//   Property.update({
+//       img: req.file.filename
+//     }, {
+//     where: {
+//       id: req.params.propertyid,
+//     }
+//   }).then(updatedProperty => {
+//         res.redirect('/admin/' + updatedProperty)
+//   })
+// });
 
 
-module.exports = router
+// module.exports = router
