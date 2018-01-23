@@ -30,6 +30,10 @@ class AdminEdit extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.dispatchSubmit = props.handleSubmit.bind(this);
     this.dispatchDelete = props.handleDelete.bind(this);
+    this.handleImg = this.handleImg.bind(this);
+    this.getSignedRequest = this.getSignedRequest.bind(this)
+    this.uploadFile = this.uploadFile.bind(this);
+    this.handleThumb = this.handleThumb.bind(this);
 
   }
 
@@ -69,42 +73,109 @@ class AdminEdit extends React.Component {
       name: event.target.value,
     })
   }
+
   handleCity (event) {
     this.setState({
       city: event.target.value,
     })
   }
+
   handleState (event) {
     this.setState({
       state: event.target.value,
     })
   }
+
   handleAcquired (event) {
     this.setState({
       acquired: event.target.value,
     })
   }
+
   handleFeet (event) {
     this.setState({
       feet: event.target.value,
     })
   }
+
   handleZip (event) {
     this.setState({
       zip: event.target.value,
     })
   }
+
   handleSubmit (event) {
     this.dispatchSubmit(this.state);
   }
+
   handleDelete (event) {
     this.dispatchDelete(this.state.id)
   }
+
+  handleThumb (event) {
+    const files = document.getElementById('file-input-thumb').files;
+    const file = files[0];
+    if(file == null){
+      return alert('No file selected.');
+    }
+    this.setState({
+      thumb: file.name
+    })
+    this.getSignedRequest(file);
+  }
+
+  handleImg (event) {
+    const files = document.getElementById('file-input-img').files;
+    const file = files[0];
+    if(file == null){
+      return alert('No file selected.');
+    }
+    this.setState({
+      img: file.name
+    })
+    this.getSignedRequest(file);
+  }
+
+  getSignedRequest (file) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+  xhr.onreadystatechange = () => {
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+                console.log(xhr.responseText)
+        const response = JSON.parse(xhr.responseText);
+        this.uploadFile(file, response.signedRequest, response.url);
+      }
+      else{
+        alert('Could not get signed URL.');
+      }
+    }
+  };
+  xhr.send();
+}
+
+uploadFile (file, signedRequest, url) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('PUT', signedRequest);
+  xhr.onreadystatechange = () => {
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+        // document.getElementById('preview').src = url;
+        // document.getElementById('avatar-url').value = url;
+      }
+      else{
+        alert('Could not upload file.');
+      }
+    }
+  };
+  xhr.send(file);
+}
+
   render () {
 
     return (
       <div>
-        <div id="admin-edit-img" style={{backgroundImage: `url(/img/${this.state.img})`}} />
+        <div id="admin-edit-img" style={{backgroundImage: `url(http://one-oh-one.s3.us-east-2.amazonaws.com/${this.state.img})`}} />
         <h1 id="edit-property">Edit Property</h1>
         <div id="edit-container">
           <form onSubmit={this.handleSubmit}  encType="multipart/form-data">
@@ -136,16 +207,16 @@ class AdminEdit extends React.Component {
                 <button id="admin-edit-btn" type="submit" className="btn">Update information</button>
             </div>
           </form>
-          <form className="upload-photo" action={`/api/upload/${this.state.id}`} method="post" encType="multipart/form-data">
+          <form onSubmit={this.handleSubmit} className="upload-photo" encType="multipart/form-data">
             <label className="admin-edit-lbl">Update Photo</label>
-            <p className="img-sub">This should be a landscape photo (approx. 1920 x 1080)</p>
-            <input accept="application/x-zip-compressed,image/*" name="img" type="file" />
+            <p className="img-sub">This should be a landscape photo (1920 x 1080)</p>
+            <input id="file-input-img" onChange={this.handleImg} accept="application/x-zip-compressed,image/*" name="img" type="file" />
             <input id="admin-edit-btn" className="btn" type="submit" value="Upload new image" />
           </form>
-          <form className="upload-photo" action={`/api/upload/thumb/${this.state.id}`} method="post" encType="multipart/form-data">
+          <form onSubmit={this.handleSubmit} className="upload-photo" encType="multipart/form-data">
             <label className="admin-edit-lbl">Update Thumbnail</label>
             <p className="img-sub">This should be a square photo (approx. 600 x 600)</p>
-            <input accept="application/x-zip-compressed,image/*" name="img" type="file" />
+            <input id="file-input-thumb" onChange={this.handleThumb} accept="application/x-zip-compressed,image/*" name="img" type="file" />
             <input id="admin-edit-btn" className="btn" type="submit" value="Upload new thumbnail" />
           </form>
           <button id="delete-btn" className="btn btn-danger" onClick={() => {if(confirm('Are you sure you want to delete this property?')){ this.handleDelete() }}}> Delete Property</button>

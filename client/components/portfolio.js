@@ -115,7 +115,7 @@ class Portfolio extends React.Component {
       document.getElementById("full-img-feet").appendChild(feet);
       //make full image visible
       fullImgDiv.classList.remove("hide");
-      fullImgDiv.style.backgroundImage = "url(img/" + fullImg + ")";
+      fullImgDiv.style.backgroundImage = "url(http://one-oh-one.s3.us-east-2.amazonaws.com/" + fullImg + ")";
       document.getElementById("nav").scrollIntoView({behavior: "smooth", block: "start"})
       this.setState({
         id: propertyId
@@ -135,7 +135,7 @@ class Portfolio extends React.Component {
       document.getElementById("full-img-acquired").appendChild(acquired);
       document.getElementById("full-img-feet").appendChild(feet);
 
-      fullImgDiv.style.backgroundImage = "url(img/" + fullImg + ")";
+      fullImgDiv.style.backgroundImage = "url(http://one-oh-one.s3.us-east-2.amazonaws.com/" + fullImg + ")";
       document.getElementById("nav").scrollIntoView({behavior: "smooth", block: "start"})
 
       this.setState({
@@ -192,7 +192,7 @@ class Portfolio extends React.Component {
     document.getElementById("full-img-acquired").appendChild(acquired);
     document.getElementById("full-img-feet").appendChild(feet);
 
-    fullImgDiv.style.backgroundImage = "url(img/" + fullImg + ")";
+    fullImgDiv.style.backgroundImage = "url(http://one-oh-one.s3.us-east-2.amazonaws.com/" + fullImg + ")";
     document.getElementById("nav").scrollIntoView({behavior: "smooth", block: "start"})
 
     fullImgDiv.classList.add("propertyId" + nextProp.id);
@@ -232,7 +232,7 @@ class Portfolio extends React.Component {
     document.getElementById("full-img-acquired").appendChild(acquired);
     document.getElementById("full-img-feet").appendChild(feet);
 
-    fullImgDiv.style.backgroundImage = "url(img/" + fullImg + ")";
+    fullImgDiv.style.backgroundImage = "url(http://one-oh-one.s3.us-east-2.amazonaws.com/" + fullImg + ")";
     document.getElementById("nav").scrollIntoView({behavior: "smooth", block: "start"})
 
     fullImgDiv.classList.add("propertyId" + nextProp.id);
@@ -323,7 +323,7 @@ class Portfolio extends React.Component {
               <img onClick={this.rightArrow} id="right-arrow" src="img/right-arrow.png" />
             </div>
             {this.state.properties && this.state.filteredProperties.map(property => {
-              return <div onClick={this.expandImg.bind(this, property.id)} key={property.id} id={property.id} className="property-tile" style={{backgroundImage: 'url(img/' + property.thumb + ')', backgroundPosition:  'center center',
+              return <div onClick={this.expandImg.bind(this, property.id)} key={property.id} id={property.id} className="property-tile" style={{backgroundImage: 'url(http://one-oh-one.s3.us-east-2.amazonaws.com/' + property.thumb + ')', backgroundPosition:  'center center',
         backgroundSize: 'cover'}}>
 
                     <div className="property-tile-hover">
