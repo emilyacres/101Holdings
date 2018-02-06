@@ -30,7 +30,7 @@ class Home extends React.Component {
     return (
       <div>
         <div id="landing">
-          <video autoPlay muted loop id="video-bg">
+          <video autoPlay muted loop poster="http://one-oh-one.s3.us-east-2.amazonaws.com/101holdings-415greenwich-full.jpg" id="video-bg">
             <source src="img/bg.mp4" type="video/mp4" />
           </video>
           <img src="img/logo-white.png" id="landing-logo" />
