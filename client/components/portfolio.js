@@ -295,7 +295,7 @@ class Portfolio extends React.Component {
                 <input onChange={this.handleState} onKeyPress={this.closeMenu} type="state" className="form-control" id="mobile-filter-state" placeholder="State" />
                 <input onChange={this.handleZip} onKeyPress={this.closeMenu} type="zip" className="form-control" id="mobile-filter-zip" placeholder="Zip" />
               </div>
-            <Link to="/about"><h1>About</h1></Link>
+            <Link to="/about"><h1>Contact</h1></Link>
           </div>
             <div id="mobile-nav" className="mobile">
               <img src="img/logo-black.png" onClick={this.scrollUp} id="mobile-logo" />
@@ -304,7 +304,7 @@ class Portfolio extends React.Component {
             <div id="nav" className="desktop">
               <h3 id="nav-filter" onClick={this.toggleFilters}>Filter</h3>
               <img onClick={this.scrollUp} id="nav-logo" src="img/logo-black.png" />
-              <Link id="nav-contact-link" to="/about"><h3 id="nav-contact">About</h3></Link>
+              <Link id="nav-contact-link" to="/about"><h3 id="nav-contact">Contact</h3></Link>
             </div>
             <div id="filters" className="hide">
               <input onChange={this.handleCity} type="city" className="form-control" id="filter-city" placeholder="City" />
