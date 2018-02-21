@@ -71,22 +71,11 @@ class About extends React.Component {
       <div>
         <div id="about-container">
           <div id="about-header">
-            <h3 id="about-title" className="desktop">About</h3>
+            <h3 id="about-title" className="desktop">About Us</h3>
             <img src="img/logo-black.png" className="mobile" id="about-title" />
             <Link to="/"><img src="img/x.png" id="close-about" /></Link>
           </div>
-          <form onSubmit={ this.handleSubmit} id="contact-form">
-            <input onChange={this.handleName} type="name" className="form-control contact-input" id="" placeholder="Name" />
-            <input onChange={this.handleEmail} type="email" className="form-control contact-input" id="contact-email" placeholder="Email*" />
-            <input onChange={this.handleSubject} type="subject" className="form-control contact-input" id="" placeholder="Subject" />
-            <label>Message</label>
-            <textarea onChange={this.handleMessage} type="message" id="contact-message" className="form-control contact-input" placeholder="" />
-            <button id="contact-btn" type="submit">Send</button>
-          </form>
-          <h4 id="valid-email" className="hide">Please enter a valid email address</h4>
-          <div id="thank-you" className="">
-            <h4 id="thank-you-msg">Thank you.</h4>
-          </div>
+
           <div className="about-sub">
             <p className="bold">General Inquires</p>
             <p>info@101-holdings.com</p>

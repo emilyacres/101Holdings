@@ -8,6 +8,20 @@ body {
     color: red;
   }
 
+  #up-arrow {
+    width: 4vw;
+    display: block;
+    margin-left: 48vw;
+    cursor: pointer;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    opacity: 0.7;
+  }
+
+  #up-arrow:hover {
+    opacity: 1;
+  }
+
   a {
     text-decoration: none;
   }

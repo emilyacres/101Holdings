@@ -34,7 +34,7 @@ class Home extends React.Component {
             <source src="img/bg.mp4" type="video/mp4" />
           </video>
           <img src="img/logo-white.png" id="landing-logo" />
-          <img src="img/arrow.png" id="down-arrow" onClick={this.scrollDown} />
+          <img src="img/arrow.gif" id="down-arrow" onClick={this.scrollDown} />
         </div>
         <Portfolio />
       </div>

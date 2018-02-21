@@ -304,7 +304,7 @@ class Portfolio extends React.Component {
             <div id="nav" className="desktop">
               <h3 id="nav-filter" onClick={this.toggleFilters}>Filter</h3>
               <img onClick={this.scrollUp} id="nav-logo" src="img/logo-black.png" />
-              <Link id="nav-contact-link" to="/about"><h3 id="nav-contact">Contact</h3></Link>
+              <Link id="nav-contact-link" to="/about"><h3 id="nav-contact">About</h3></Link>
             </div>
             <div id="filters" className="hide">
               <input onChange={this.handleCity} type="city" className="form-control" id="filter-city" placeholder="City" />
@@ -335,6 +335,7 @@ class Portfolio extends React.Component {
                   </div>
             })}
         </div>
+        <img src="img/up-arrow.png" id="up-arrow" onClick={this.scrollUp} />
       </div>
     )
   }
