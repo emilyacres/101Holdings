@@ -23,9 +23,6 @@ class Portfolio extends React.Component {
       id: ""
     }
 
-    this.handleCity = this.handleCity.bind(this);
-    this.handleState = this.handleState.bind(this);
-    this.handleZip = this.handleZip.bind(this);
     this.scrollUp = this.scrollUp.bind(this);
     this.closeImg = this.closeImg.bind(this);
     this.showMenu = this.showMenu.bind(this);
@@ -34,6 +31,9 @@ class Portfolio extends React.Component {
     this.toggleFilters = this.toggleFilters.bind(this);
     this.leftArrow = this.leftArrow.bind(this);
     this.rightArrow = this.rightArrow.bind(this);
+    this.closeFilter = this.closeFilter.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
+    this.handleMobileFilter = this.handleMobileFilter.bind(this);
 
   }
 
@@ -57,31 +57,52 @@ class Portfolio extends React.Component {
     }
   }
 
-  handleCity (event) {
-    var newProperties = this.state.properties.filter( property => {
-        return property.city.toUpperCase().startsWith(event.target.value.toUpperCase())
+  handleFilter (city) {
+    let newProperties;
+    if ( city !== "National") {
+      newProperties = this.state.properties.filter( property => {
+        return property.city === city
       })
+    } else {
+      newProperties = this.state.properties.filter( property => {
+        return property.city !== "Brooklyn" && property.city !== "Bronx" && property.city !== "New York"
+      })
+    }
     this.setState({
       filteredProperties: newProperties
     })
+
+    if (city === "New York") city = "Manhattan";
+    document.getElementById("nav-filter").innerHTML = "Filter: ";
+    document.getElementById("nav-selected").innerHTML = "" + city + "";
+    document.getElementById("close-filter").classList.remove("hide");
+    this.toggleFilters();
   }
 
-  handleState (event) {
-    var newProperties = this.state.properties.filter( property => {
-        return property.state.toUpperCase().startsWith(event.target.value.toUpperCase())
+  handleMobileFilter (city) {
+    let newProperties;
+    if ( city !== "National") {
+      newProperties = this.state.properties.filter( property => {
+        return property.city === city
       })
+    } else {
+      newProperties = this.state.properties.filter( property => {
+        return property.city !== "Brooklyn" && property.city !== "Bronx" && property.city !== "New York"
+      })
+    }
     this.setState({
       filteredProperties: newProperties
     })
+    this.closeMenu();
   }
 
-  handleZip (event) {
-    var newProperties = this.state.properties.filter( property => {
-        return property.zip.toUpperCase().startsWith(event.target.value.toUpperCase())
-      })
+  closeFilter (event) {
     this.setState({
-      filteredProperties: newProperties
+      filteredProperties: this.state.properties
     })
+    document.getElementById("nav-filter").innerHTML = "Filter";
+    document.getElementById("close-filter").classList.add("hide");
+    document.getElementById("nav-selected").innerHTML = "";
   }
 
   scrollUp (event) {
@@ -247,16 +268,15 @@ class Portfolio extends React.Component {
   }
 
   closeMenu (event) {
-    //close menu when 'enter' is hit on filters
-    if( event.key && event.key !== "Enter" ) {
-      return;
-    }
-
+    document.getElementById("mobile-filters").classList.add("hide")
     document.getElementById("mobile-menu-list").classList.add("hide")
-
   }
 
   showMobileFilters () {
+    this.setState({
+      filteredProperties: this.state.properties
+    })
+
     let filters = document.getElementById("mobile-filters")
     let classes = Array.prototype.slice.call(filters.classList);
 
@@ -270,10 +290,8 @@ class Portfolio extends React.Component {
   }
 
   toggleFilters () {
-    let filters = document.getElementById("filters");
+    let filters = document.getElementById("dropdown-menu");
     let classes = Array.prototype.slice.call(filters.classList)
-    console.log(filters);
-    console.log(classes)
     if ( classes.includes("hide") ) {
       filters.classList.remove("hide");
     } else {
@@ -291,9 +309,10 @@ class Portfolio extends React.Component {
             <h1 onClick={this.closeMenu}>Portfolio</h1>
             <h1 id="mobile-filter-toggle" onClick={this.showMobileFilters}>Filter</h1>
               <div id="mobile-filters" className="hide">
-                <input onChange={this.handleCity} onKeyPress={this.closeMenu} type="city" className="form-control" id="mobile-filter-city" placeholder="City" />
-                <input onChange={this.handleState} onKeyPress={this.closeMenu} type="state" className="form-control" id="mobile-filter-state" placeholder="State" />
-                <input onChange={this.handleZip} onKeyPress={this.closeMenu} type="zip" className="form-control" id="mobile-filter-zip" placeholder="Zip" />
+                <h1 onClick={this.handleMobileFilter.bind(this, "New York")} onKeyPress={this.closeMenu} id="mobile-filter-city">Manhattan</h1>
+                <h1 onClick={this.handleMobileFilter.bind(this, "Brooklyn")} onKeyPress={this.closeMenu} id="mobile-filter-state">Brooklyn</h1>
+                <h1 onClick={this.handleMobileFilter.bind(this, "Bronx")} onKeyPress={this.closeMenu}  id="mobile-filter-zip"> Bronx</h1>
+                <h1 onClick={this.handleMobileFilter.bind(this, "National")} onKeyPress={this.closeMenu}  id="mobile-filter-zip"> National</h1>
               </div>
             <Link to="/about"><h1>Contact</h1></Link>
           </div>
@@ -303,13 +322,16 @@ class Portfolio extends React.Component {
             </div>
             <div id="nav" className="desktop">
               <h3 id="nav-filter" onClick={this.toggleFilters}>Filter</h3>
+              <h3 id="nav-selected"></h3>
+              <img src="img/x.png" onClick={this.closeFilter} id="close-filter" className="hide" />
+              <div id="dropdown-menu" className="hide">
+                <h4 onClick={this.handleFilter.bind(this, "New York")}>Manhattan</h4>
+                <h4 onClick={this.handleFilter.bind(this, "Brooklyn")}>Brooklyn</h4>
+                <h4 onClick={this.handleFilter.bind(this, "Bronx")}>Bronx</h4>
+                <h4 onClick={this.handleFilter.bind(this, "National")}>National</h4>
+              </div>
               <img onClick={this.scrollUp} id="nav-logo" src="img/logo-black.png" />
               <Link id="nav-contact-link" to="/about"><h3 id="nav-contact">About</h3></Link>
-            </div>
-            <div id="filters" className="hide">
-              <input onChange={this.handleCity} type="city" className="form-control" id="filter-city" placeholder="City" />
-              <input onChange={this.handleState} type="state" className="form-control" id="filter-state" placeholder="State" />
-              <input onChange={this.handleZip} type="zip" className="form-control" id="filter-zip" placeholder="Zip Code" />
             </div>
             <div id="full-img" className="hide">
               <img onClick={this.leftArrow} id="left-arrow" src="img/left-arrow.png" />
