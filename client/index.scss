@@ -418,45 +418,50 @@ body {
     background-position:  center center;
     background-size: cover;
     margin-bottom: 2vw;
-    text-align: center;
   }
 
-  #full-img-hover {
-    margin: 0;
-    padding: 0;
+  #full-img-text {
+    position: relative;
+    top: 67vh;
     width: 79vw;
-    height: 79vh;
-    visibility: hidden;
-    background-color: rgba(255, 255, 255, .8);
-  }
+    height: 12vh;
+    min-height: 50px;
+    background-color: rgba(255, 255, 255, .7);
+    text-align: right;
+    padding: 0;
+    margin: 0;
 
-  #full-img-hover:hover {
-    visibility: visible;
-  }
 
-  #full-img:hover {
-    #full-img-hover {
-      visibility: visible;
+    h4 {
+      vertical-align: center;
+      position: relative;
+      top: 2vh;
+      display: inline-block;
+      margin-right: 1vw;
+      font-size: 1.5vw;
     }
 
-    #close-img {
-      text-align: right;
-      padding: 1vw;
-      cursor: pointer;
+    #full-img-name {
+      display: block;
+      font-size: 1.7vw;
+      margin-right: 4vw;
+    }
+
+    #full-img-feet {
+      margin-right: 4vw;
     }
   }
 
   #close-img {
-    position: relative;
-    margin-left: 74vw;
-    margin-top: 1vh;
+    padding: 1vw;
+    cursor: pointer;
+    position: absolute;
+    top: -70vh;
+    right: -5vw;
     width: 3.5vw;
     opacity: 1 !important;
   }
 
-  #full-img-name {
-    margin-top: 20vh;
-  }
 
   .property-tile {
     width: 25vw;

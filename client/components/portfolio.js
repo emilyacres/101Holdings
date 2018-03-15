@@ -335,11 +335,13 @@ class Portfolio extends React.Component {
             </div>
             <div id="full-img" className="hide">
               <img onClick={this.leftArrow} id="left-arrow" src="img/left-arrow.png" />
-              <div id="full-img-hover">
+              <div id="full-img-text">
                 <img src="img/x.png" onClick={this.closeImg} id="close-img" />
                 <h4 id="full-img-name" className="bold"></h4>
                 <h4 id="full-img-city"></h4>
+                <h4>  &bull;  </h4>
                 <h4 id="full-img-acquired"></h4>
+                <h4>  &bull;  </h4>
                 <h4 id="full-img-feet"></h4>
               </div>
               <img onClick={this.rightArrow} id="right-arrow" src="img/right-arrow.png" />
