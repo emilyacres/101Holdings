@@ -107,7 +107,7 @@ class Portfolio extends React.Component {
 
   scrollUp (event) {
     event.preventDefault();
-    let top = document.getElementById("landing")
+    let top = document.getElementById("properties-container")
     top.scrollIntoView({behavior: "smooth", block: "start"})
   }
 
