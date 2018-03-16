@@ -15,33 +15,56 @@ class Admin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      password: "",
-      password2: "",
-      properties: props.properties
-    };
+      filteredProperties: props.properties,
+      properties: props.properties,
+    }
 
     this.emailPassword = props.emailPassword.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.checkPassword = this.checkPassword.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.sortByRank = this.sortByRank.bind(this);
 
   }
 
   componentWillReceiveProps (nextProps) {
     this.setState({
-      properties: nextProps.properties
+      properties: this.sortByRank(nextProps.properties),
+      filteredProperties: this.sortByRank(nextProps.properties)
     })
   }
-  handlePassword(event) {
+
+  handlePassword (event) {
     this.setState({
       password: event.target.value
     })
   }
+
+  sortByRank (properties) {
+    return properties.sort(function(a, b) {
+        var x = a.rank; var y = b.rank;
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
+
+  handleSearch (event) {
+    //console.log(event.target.value)
+    let newProperties = this.state.properties.filter( property => {
+        return property.name.toLowerCase().includes(event.target.value.toLowerCase());
+    })
+    console.log(newProperties)
+    this.setState({
+      filteredProperties: this.sortByRank(newProperties)
+    })
+  }
+
   checkPassword(event) {
     this.setState({
       password2: event.target.value
     })
   }
+
   updatePassword (event) {
     event.preventDefault();
     if ( this.state.password !== this.state.password2 ) {
@@ -57,13 +80,26 @@ class Admin extends React.Component {
 
   render () {
     return (
-      <div>
+      <div id="admin-container">
         <Link to="/"><img src="/img/logo-black.png" id="admin-logo" /></Link>
-        <h1 id="admin-header">Properties</h1>
+        <h1 id="admin-header">Preview properties:</h1>
+        <input onChange={this.handleSearch} type="search" id="admin-search" placeholder="Search by name" />
         <Link to="/admin/new"><button className="btn" id="new-prop-btn">+ New Property</button></Link>
-        {this.state.properties.map(property => {
-          return <div key={property.id} className="admin-properties"><h3 className="admin-prop-name">{property.name}</h3><Link  to={`/admin/${property.id}`}><button className="btn admin-prop-btn" id="admin-edit-btn">edit</button></Link></div>
-        })}
+        <div id="admin-properties">
+          {this.state.properties && this.state.filteredProperties.map(property => {
+                return <Link key={property.id} to={`/admin/${property.id}`}><div id={property.id} className="property-tile" style={{backgroundImage: 'url(http://one-oh-one.s3.us-east-2.amazonaws.com/' + property.thumb + ')', backgroundPosition:  'center center',
+          backgroundSize: 'cover'}}>
+
+                      <div className="property-tile-hover">
+                        <h4 className="property-tile-name">{property.name}</h4>
+                        <h4 className="property-tile-date">{property.city}, {property.state}</h4>
+                        <h4 className="property-tile-date mobile">{property.acquired}</h4>
+                        <h4 className="property-tile-date mobile">{property.feet}</h4>
+                      </div>
+                    </div>
+                    </Link>
+              })}
+        </div>
         <form className="hide" onSubmit={this.updatePassword}>
           <div>
             <label className="admin-edit-lbl">New Password</label>

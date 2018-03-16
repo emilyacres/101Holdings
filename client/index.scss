@@ -159,35 +159,54 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
   }
 
+  #admin-container {
+    margin-left: 10vw;
+    margin-right: 7vw;
+    padding-top: 5vh;
+  }
+
   #admin-header {
     text-align: center;
     margin-top: -3vh;
     margin-bottom: 3vh;
+    font-size: 2em;
   }
 
   #admin-logo {
     width: 10vw;
-    margin-left: 45vw;
+    margin-left: 35vw;
+    margin-top: -5vh;
   }
 
   .admin-prop-name {
     float: left;
   }
 
-  .admin-prop-btn {
-    margin-left: 1vw;
-    float: right;
-    margin-top: 2vh;
+  #admin-search {
+    float: left;
+    display: inline-block;
+    border: none;
+    font-size: 1.2vw;
+    border-bottom: 1px black solid;
+  }
+
+  #admin-properties {
+    clear: both;
+    margin-top: 10vh;
   }
 
   #new-prop-btn {
     width: 10vw;
-    margin-left: 45vw;
+    float: right;
     background-color: red;
     opacity: 0.8;
     color: white;
     font-size: 1.2vw;
-    margin-bottom: 3vh;
+    margin-right: 4vw;
+    margin-top: -7vh;
+    margin-bottom: 5vh;
+    clear: both;
+    display: inline-block;
   }
 
   #new-prop-btn:hover {
@@ -205,7 +224,7 @@ body {
   #admin-edit-img {
     background-position:  center center;
     background-size: cover;
-    height: 30vh;
+    height: 20vh;
     margin: 0;
     opacity: 0.5;
   }
@@ -245,6 +264,56 @@ body {
     color: white;
   }
 
+  #up-one-btn {
+    margin-right: 2vw;
+    background-color: green;
+    opacity: .7;
+    color: white;
+    border: none;
+  }
+
+  #up-one-btn:hover {
+    opacity: 1;
+    border: none;
+  }
+
+  #up-all-btn {
+    margin-right: 2vw;
+    background-color: green;
+    opacity: .9;
+    color: white;
+    border: none;
+  }
+
+  #up-all-btn:hover {
+    opacity: 1;
+    border: none;
+  }
+
+  #down-one-btn {
+    margin-right: 2vw;
+    background-color: crimson;
+    opacity: .7;
+    color: white;
+    border: none;
+  }
+
+  #down-one-btn:hover {
+    opacity: 1;
+  }
+
+  #down-all-btn {
+    margin-right: 2vw;
+    background-color: crimson;
+    color: white;
+    opacity: .9;
+    border: none;
+  }
+
+  #down-all-btn:hover {
+    opacity: 1;
+  }
+
   #edit-property {
     position: absolute;
     left: 35vw;
@@ -269,9 +338,17 @@ body {
   }
 
   #delete-btn {
-    position: relative;
-    right:0;
-    margin-left: 5vw;
+    float: right;
+    margin-right: 3vw;
+    background-color: red;
+    opacity: .9;
+    border: none;
+    padding: 1vw 2vw;
+  }
+
+  #delete-btn:hover {
+    opacity: 1;
+    border: none;
   }
 
   #landing {

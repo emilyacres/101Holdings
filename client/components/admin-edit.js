@@ -18,6 +18,7 @@ class AdminEdit extends React.Component {
       zip: "",
       img: "",
       thumb: "",
+      rank: "",
       id: props.match.params.id,
     };
 
@@ -48,6 +49,7 @@ class AdminEdit extends React.Component {
       feet: property.feet,
       zip: property.zip,
       img: property.img,
+      rank: property.rank,
       thumb: property.thumb,
     })
   }
@@ -63,6 +65,7 @@ class AdminEdit extends React.Component {
         feet: property.feet,
         zip: property.zip,
         img: property.img,
+        rank: property.rank,
         thumb: property.thumb,
       })
     }
@@ -178,6 +181,7 @@ uploadFile (file, signedRequest, url) {
         <div id="admin-edit-img" style={{backgroundImage: `url(http://one-oh-one.s3.us-east-2.amazonaws.com/${this.state.img})`}} />
         <h1 id="edit-property">Edit Property</h1>
         <div id="edit-container">
+          <h3>Edit general:</h3>
           <form onSubmit={this.handleSubmit}  encType="multipart/form-data">
             <div>
               <label className="admin-edit-lbl">Name/Street Address</label>
@@ -219,6 +223,13 @@ uploadFile (file, signedRequest, url) {
             <input id="file-input-thumb" onChange={this.handleThumb} accept="application/x-zip-compressed,image/*" name="img" type="file" />
             <input id="admin-edit-btn" className="btn" type="submit" value="Upload new thumbnail" />
           </form>
+          <div id="admin-edit-position">
+            <h4>Positioning:</h4>
+            <button id="up-one-btn" className="btn">Move me up one</button>
+            <button id="up-all-btn" className="btn">Move me to top</button>
+            <button id="down-one-btn" className="btn">Move me down one</button>
+            <button id="down-all-btn" className="btn">Move me to bottom</button>
+          </div>
           <button id="delete-btn" className="btn btn-danger" onClick={() => {if(confirm('Are you sure you want to delete this property?')){ this.handleDelete() }}}> Delete Property</button>
         </div>
       </div>

@@ -34,17 +34,19 @@ class Portfolio extends React.Component {
     this.closeFilter = this.closeFilter.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
     this.handleMobileFilter = this.handleMobileFilter.bind(this);
+    this.sortByRank = this.sortByRank.bind(this);
 
   }
 
   componentWillReceiveProps (nextProps) {
     this.setState({
-      filteredProperties: nextProps.properties,
-      properties: nextProps.properties
+      filteredProperties: this.sortByRank(nextProps.properties),
+      properties: this.sortByRank(nextProps.properties)
     })
   }
 
   componentDidMount () {
+    window.addEventListener('scroll', this.handleScroll);
     var OSName="Unknown OS";
     if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
     if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
@@ -55,6 +57,28 @@ class Portfolio extends React.Component {
         document.getElementById("properties-container").style.marginLeft = '9vw';
       }
     }
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  sortByRank (properties) {
+    return properties.sort(function(a, b) {
+        var x = a.rank; var y = b.rank;
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+  }
+
+  handleScroll (event) {
+    // var properties = document.getElementById('properties-container');
+    // var distanceToTop = properties.getBoundingClientRect().top;
+    // console.log("scrolled", distanceToTop)
+    // if ( distanceToTop < 0) {
+    //   document.getElementById('nav').style.position = 'fixed';
+    // } else {
+    //   document.getElementById('nav').style.position = 'absolute';
+    // }
   }
 
   handleFilter (city) {
@@ -69,7 +93,7 @@ class Portfolio extends React.Component {
       })
     }
     this.setState({
-      filteredProperties: newProperties
+      filteredProperties: this.sortByRank(newProperties)
     })
 
     if (city === "New York") city = "Manhattan";
@@ -91,14 +115,14 @@ class Portfolio extends React.Component {
       })
     }
     this.setState({
-      filteredProperties: newProperties
+      filteredProperties: this.sortByRank(newProperties)
     })
     this.closeMenu();
   }
 
   closeFilter (event) {
     this.setState({
-      filteredProperties: this.state.properties
+      filteredProperties: this.sorthByRank(this.state.properties)
     })
     document.getElementById("nav-filter").innerHTML = "Filter";
     document.getElementById("close-filter").classList.add("hide");

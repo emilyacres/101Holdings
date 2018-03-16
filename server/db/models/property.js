@@ -34,7 +34,11 @@ const Property = db.define('property', {
   thumb: {
     type: Sequelize.STRING,
     allowNull: true
-  }
+  },
+  rank: {
+    type: Sequelize.INTEGER,
+    allowNull: true
+  },
 })
 
 module.exports = Property;
