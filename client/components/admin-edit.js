@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { logout, updateProperty, deleteProperty } from '../store'
+import { logout, updateProperty, deleteProperty, upOne, upAll, downOne, downAll } from '../store'
 import { history } from "../history"
 
 
@@ -31,8 +31,16 @@ class AdminEdit extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.dispatchSubmit = props.handleSubmit.bind(this);
     this.dispatchDelete = props.handleDelete.bind(this);
+    this.dispatchUpOne = props.handleUpOne.bind(this);
+    this.dispatchUpAll = props.handleUpAll.bind(this);
+    this.dispatchDownOne = props.handleDownOne.bind(this);
+    this.dispatchDownAll = props.handleDownAll.bind(this);
+    this.handleUpOne = this.handleUpOne.bind(this);
+    this.handleUpAll = this.handleUpAll.bind(this);
+    this.handleDownOne = this.handleDownOne.bind(this);
+    this.handleDownAll = this.handleDownAll.bind(this);
     this.handleImg = this.handleImg.bind(this);
-    this.getSignedRequest = this.getSignedRequest.bind(this)
+    this.getSignedRequest = this.getSignedRequest.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
     this.handleThumb = this.handleThumb.bind(this);
 
@@ -174,6 +182,22 @@ uploadFile (file, signedRequest, url) {
   xhr.send(file);
 }
 
+handleUpOne () {
+  this.dispatchUpOne(this.state);
+}
+
+handleUpAll () {
+  this.dispatchUpAll(this.state);
+}
+
+handleDownOne () {
+  this.dispatchDownOne(this.state);
+}
+
+handleDownAll () {
+  this.dispatchDownAll(this.state);
+}
+
   render () {
 
     return (
@@ -225,10 +249,10 @@ uploadFile (file, signedRequest, url) {
           </form>
           <div id="admin-edit-position">
             <h4>Positioning:</h4>
-            <button id="up-one-btn" className="btn">Move me up one</button>
-            <button id="up-all-btn" className="btn">Move me to top</button>
-            <button id="down-one-btn" className="btn">Move me down one</button>
-            <button id="down-all-btn" className="btn">Move me to bottom</button>
+            <button onClick={this.handleUpOne} id="up-one-btn" className="btn">Move me up one</button>
+            <button onClick={this.handleUpAll}id="up-all-btn" className="btn">Move me to top</button>
+            <button onClick={this.handleDownOne} id="down-one-btn" className="btn">Move me down one</button>
+            <button onClick={this.handleDownAll} id="down-all-btn" className="btn">Move me to bottom</button>
           </div>
           <button id="delete-btn" className="btn btn-danger" onClick={() => {if(confirm('Are you sure you want to delete this property?')){ this.handleDelete() }}}> Delete Property</button>
         </div>
@@ -257,7 +281,19 @@ const mapDispatch = (dispatch) => {
     },
     handleDelete (property) {
       dispatch(deleteProperty(property))
-    }
+    },
+    handleUpOne (property) {
+      dispatch(upOne(property))
+    },
+    handleUpAll (property) {
+      dispatch(upAll(property))
+    },
+    handleDownOne (property) {
+      dispatch(downOne(property))
+    },
+    handleDownAll (property) {
+      dispatch(downAll(property))
+    },
   }
 }
 

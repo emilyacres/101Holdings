@@ -13,14 +13,44 @@ router.put('/:propertyid', (req, res, next) => {
 })
 
 router.delete('/:propertyid', (req, res, next) => {
-  Property.destroy({
+
+  let rank;
+
+  Property.findOne({
     where: {
       id: req.params.propertyid
     }
-  })
-  .then(() => {
+  }).then( propertyToDelete => {
+    rank = propertyToDelete.rank
+    return rank
+  }).then( propertyRank => {
+    return Property.findAll({})
+  }).then( allProperties => {
+    let propertiesToUpdate = [];
+    allProperties.forEach( property => {
+      if (property.rank > rank) {
+        property.rank--
+        let newProp = {
+          rank: property.rank--
+        }
+        Property.update(newProp, {
+          where: {
+            id: property.id
+          }
+        }).then( updatedProperty => {
+          console.log("updated rank")
+        }).catch(next)
+      }
+    })
+    return Property.destroy({
+              where: {
+                id: req.params.propertyid
+              }
+            })
+  }).then( deletedProperty => {
     res.redirect('/admin')
   }).catch(next)
+
 })
 
 router.post('/', (req, res, next) => {

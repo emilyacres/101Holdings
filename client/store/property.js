@@ -63,6 +63,38 @@ export const deleteProperty = (propertyId) =>
       })
       .catch(err => console.log(err))
 
+export const upOne = (property) =>
+  dispatch =>
+    axios.put(`/api/rank/upone/${property.id}`, property)
+      .then( res => {
+        dispatch(updateProperties(res.data || defaultProperties))
+      })
+      .catch(err => console.log(err))
+
+export const upAll = (property) =>
+  dispatch =>
+    axios.put(`/api/rank/upall/${property.id}`, property)
+      .then( res => {
+        dispatch(updateProperties(res.data || defaultProperties))
+      })
+      .catch(err => console.log(err))
+
+export const downOne = (property) =>
+  dispatch =>
+    axios.put(`/api/rank/downone/${property.id}`, property)
+      .then( res => {
+        dispatch(updateProperties(res.data || defaultProperties))
+      })
+      .catch(err => console.log(err))
+
+export const downAll = (property) =>
+  dispatch =>
+    axios.put(`/api/rank/downall/${property.id}`, property)
+      .then( res => {
+        dispatch(updateProperties(res.data || defaultProperties))
+      })
+      .catch(err => console.log(err))
+
 
 /**
  * REDUCER
