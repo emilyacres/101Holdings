@@ -1,5 +1,6 @@
 const User = require('./user');
 const Property = require('./property');
+const Image = require('./image')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -7,8 +8,8 @@ const Property = require('./property');
  *
  *    BlogPost.belongsTo(User)
  */
- //Property.hasMany(Image)
- //Image.belongsTo(Property);
+ Property.hasMany(Image)
+
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -19,4 +20,5 @@ const Property = require('./property');
 module.exports = {
   User,
   Property,
+  Image
 }

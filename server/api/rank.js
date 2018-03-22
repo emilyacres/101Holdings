@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Property } = require('../db/models')
+const { Property, Image } = require('../db/models')
 
 
 router.put('/upone/:propertyid', (req, res, next) => {
@@ -22,7 +22,9 @@ router.put('/upone/:propertyid', (req, res, next) => {
       }
     })
   }).then( updatedProperty2 => {
-    return Property.findAll({})
+    return Property.findAll({
+      include: [ { model: Image, as: 'images' } ]
+    })
   }).then( properties => {
     res.send(properties);
   }).catch(next);
@@ -54,7 +56,9 @@ router.put('/upall/:propertyid', (req, res, next) => {
       }
     })
   }).then( topProperty => {
-    return Property.findAll({})
+    return Property.findAll({
+      include: [ { model: Image, as: 'images' } ]
+    })
   }).then( properties => {
     res.send(properties)
   }).catch(next)
@@ -82,7 +86,9 @@ router.put('/downone/:propertyid', (req, res, next) => {
       }
     })
   }).then( updatedProperty2 => {
-    return Property.findAll({})
+    return Property.findAll({
+      include: [ { model: Image, as: 'images' } ]
+    })
   }).then( properties => {
     res.send(properties);
   }).catch(next);
@@ -116,7 +122,9 @@ router.put('/downall/:propertyid', (req, res, next) => {
       }
     })
   }).then( botProperty => {
-    return Property.findAll({})
+    return Property.findAll({
+      include: [ { model: Image, as: 'images' } ]
+    })
   }).then( properties => {
     console.log(properties)
     res.send(properties)

@@ -27,10 +27,6 @@ const Property = db.define('property', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  img: {
-    type: Sequelize.STRING,
-    allowNull: true
-  },
   thumb: {
     type: Sequelize.STRING,
     allowNull: true

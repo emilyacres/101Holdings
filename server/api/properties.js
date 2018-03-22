@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Property } = require('../db/models')
+const { Property, Image } = require('../db/models')
 
 
 router.put('/:propertyid', (req, res, next) => {
@@ -66,7 +66,7 @@ router.post('/', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
   Property.findAll({
-
+    include: [ { model: Image, as: 'images' } ]
   }).then(properties => {
     res.json(properties)
   }).catch(next)

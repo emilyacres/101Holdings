@@ -149,7 +149,7 @@ class Portfolio extends React.Component {
       return ;
     }
     let propertyData = this.state.properties.filter(prop => prop.id === propertyId)[0];
-    let fullImg = this.state.properties.filter(prop => prop.id === propertyId)[0].img;
+    let fullImg = this.state.properties.filter(prop => prop.id === propertyId)[0].images[0].filename;
     let fullImgDiv = document.getElementById("full-img");
     let classes = Array.prototype.slice.call(fullImgDiv.classList);
 
@@ -225,7 +225,7 @@ class Portfolio extends React.Component {
       nextProp = this.state.properties[currentIdx-1]
     }
 
-    let fullImg = nextProp.img;
+    let fullImg = nextProp.images[0].filename;
     let fullImgDiv = document.getElementById("full-img");
 
     //create text nodes for hover state
@@ -264,8 +264,7 @@ class Portfolio extends React.Component {
     } else {
       nextProp = this.state.properties[currentIdx+1]
     }
-
-    let fullImg = nextProp.img;
+    let fullImg = nextProp.images[0].filename;
     let fullImgDiv = document.getElementById("full-img");
 
     //create text nodes for hover state
