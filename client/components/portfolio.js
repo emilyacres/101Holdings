@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import { logout } from '../store'
+import Slider from 'react-slick'
 
 /**
  * COMPONENT
@@ -35,6 +36,7 @@ class Portfolio extends React.Component {
     this.handleFilter = this.handleFilter.bind(this);
     this.handleMobileFilter = this.handleMobileFilter.bind(this);
     this.sortByRank = this.sortByRank.bind(this);
+    this.scrollTop = this.scrollTop.bind(this);
 
   }
 
@@ -131,8 +133,14 @@ class Portfolio extends React.Component {
 
   scrollUp (event) {
     event.preventDefault();
-    let top = document.getElementById("properties-container")
-    top.scrollIntoView({behavior: "smooth", block: "start"})
+    let top = document.getElementById("properties-container");
+    top.scrollIntoView({behavior: "smooth", block: "start"});
+  }
+
+  scrollTop (event) {
+    event.preventDefault();
+    let top = document.getElementById("landing");
+    top.scrollIntoView({behavior: "smooth", block: "start"});
   }
 
   expandImg (propertyId) {
@@ -329,7 +337,7 @@ class Portfolio extends React.Component {
         <div id="properties-container">
           <div id="mobile-menu-list" className="mobile hide">
             <img src="img/x.png" onClick={this.closeMenu} id="mobile-close" />
-            <h1 onClick={this.scrollUp}>Home</h1>
+            <h1 onClick={this.scrollTop}>Home</h1>
             <h1 onClick={this.closeMenu}>Portfolio</h1>
             <h1 id="mobile-filter-toggle" onClick={this.showMobileFilters}>Filter</h1>
               <div id="mobile-filters" className="hide">
@@ -341,7 +349,7 @@ class Portfolio extends React.Component {
             <Link to="/about"><h1>Contact</h1></Link>
           </div>
             <div id="mobile-nav" className="mobile">
-              <img src="img/logo-black.png" onClick={this.scrollUp} id="mobile-logo" />
+              <img src="img/logo-black.png" onClick={this.scrollTop} id="mobile-logo" />
               <img src="img/menu.png" id="mobile-menu" onClick={this.showMenu} />
             </div>
             <div id="nav" className="desktop">
@@ -354,7 +362,7 @@ class Portfolio extends React.Component {
                 <h4 onClick={this.handleFilter.bind(this, "Bronx")}>Bronx</h4>
                 <h4 onClick={this.handleFilter.bind(this, "National")}>National</h4>
               </div>
-              <img onClick={this.scrollUp} id="nav-logo" src="img/logo-black.png" />
+              <img onClick={this.scrollTop} id="nav-logo" src="img/logo-black.png" />
               <Link id="nav-contact-link" to="/about"><h3 id="nav-contact">About</h3></Link>
             </div>
             <div id="full-img-div" className="hide">

@@ -46,7 +46,7 @@ class Admin extends React.Component {
         var x = a.rank; var y = b.rank;
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
     });
-}
+  }
 
   handleSearch (event) {
     //console.log(event.target.value)
