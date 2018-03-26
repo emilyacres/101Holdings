@@ -149,7 +149,8 @@ class Portfolio extends React.Component {
       return ;
     }
     let propertyData = this.state.properties.filter(prop => prop.id === propertyId)[0];
-    let fullImg = this.state.properties.filter(prop => prop.id === propertyId)[0].images[0].filename;
+    let fullImg = propertyData.images[0].filename;
+    let images  = propertyData.images;
     let fullImgDiv = document.getElementById("full-img");
     let classes = Array.prototype.slice.call(fullImgDiv.classList);
 
@@ -158,6 +159,8 @@ class Portfolio extends React.Component {
     let city = document.createTextNode(propertyData.city + ', ' + propertyData.state)
     let acquired = document.createTextNode("Acquired " + propertyData.acquired);
     let feet = document.createTextNode(propertyData.feet + " Sq ft.");
+
+
 
     if (classes.includes("hide")) {
 
@@ -170,9 +173,20 @@ class Portfolio extends React.Component {
       document.getElementById("full-img-div").classList.remove("hide");
       fullImgDiv.classList.remove("hide");
       fullImgDiv.style.backgroundImage = "url(http://one-oh-one.s3.us-east-2.amazonaws.com/" + fullImg + ")";
+      //create dots for multiple images
+      if ( images.length > 1) {
+        for ( let i = 1; i < images.length; i++) {
+          var node = document.createElement("H1");
+          var textnode = document.createTextNode("•");
+          node.appendChild(textnode);
+          document.getElementById("img-dots").appendChild(node);
+        }
+      }
+
       this.setState({
         id: propertyId
       })
+
       fullImgDiv.classList.add("propertyId" + propertyId);
 
 
@@ -195,6 +209,24 @@ class Portfolio extends React.Component {
       })
 
       fullImgDiv.classList.add("propertyId" + propertyId);
+
+      //check number of dots matches images
+      let dotsDiv = document.getElementById("img-dots");
+      if (dotsDiv.childNodes.length != images.length) {
+        //remove all extra dots
+        for( let i = 1; i <= dotsDiv.childNodes.length; i++) {
+          dotsDiv.removeChild(dotsDiv.childNodes[i]);
+        }
+        //create new dots
+        if ( images.length > 1) {
+          for ( let i = 1; i < images.length; i++) {
+            var node = document.createElement("H1");
+            var textnode = document.createTextNode("•");
+            node.appendChild(textnode);
+            document.getElementById("img-dots").appendChild(node);
+          }
+        }
+      }
     }
   }
 
@@ -213,6 +245,11 @@ class Portfolio extends React.Component {
     document.getElementById("full-img-acquired").innerHTML = "";
     document.getElementById("full-img-feet").innerHTML = "";
     //document.getElementById(propertyId).scrollIntoView({behavior: "smooth", block: "start"})
+    //remove extra dots
+      let dotsDiv = document.getElementById("img-dots");
+      for( let i = 1; i <= dotsDiv.childNodes.length; i++) {
+        dotsDiv.removeChild(dotsDiv.childNodes[i]);
+      }
   }
 
   leftArrow () {
@@ -226,6 +263,7 @@ class Portfolio extends React.Component {
     }
 
     let fullImg = nextProp.images[0].filename;
+    let images = nextProp.images
     let fullImgDiv = document.getElementById("full-img");
 
     //create text nodes for hover state
@@ -247,6 +285,24 @@ class Portfolio extends React.Component {
 
     fullImgDiv.style.backgroundImage = "url(http://one-oh-one.s3.us-east-2.amazonaws.com/" + fullImg + ")";
     //document.getElementById("nav").scrollIntoView({behavior: "smooth", block: "start"})
+
+    //check number of dots matches images
+      let dotsDiv = document.getElementById("img-dots");
+      if (dotsDiv.childNodes.length != images.length) {
+        //remove all extra dots
+        for( let i = 1; i <= dotsDiv.childNodes.length; i++) {
+          dotsDiv.removeChild(dotsDiv.childNodes[i]);
+        }
+        //create new dots
+        if ( images.length > 1) {
+          for ( let i = 1; i < images.length; i++) {
+            var node = document.createElement("H1");
+            var textnode = document.createTextNode("•");
+            node.appendChild(textnode);
+            document.getElementById("img-dots").appendChild(node);
+          }
+        }
+      }
 
     fullImgDiv.classList.add("propertyId" + nextProp.id);
 
@@ -265,6 +321,7 @@ class Portfolio extends React.Component {
       nextProp = this.state.properties[currentIdx+1]
     }
     let fullImg = nextProp.images[0].filename;
+    let images = nextProp.images
     let fullImgDiv = document.getElementById("full-img");
 
     //create text nodes for hover state
@@ -286,6 +343,25 @@ class Portfolio extends React.Component {
 
     fullImgDiv.style.backgroundImage = "url(http://one-oh-one.s3.us-east-2.amazonaws.com/" + fullImg + ")";
     //document.getElementById("nav").scrollIntoView({behavior: "smooth", block: "start"})
+
+        //check number of dots matches images
+      let dotsDiv = document.getElementById("img-dots");
+      if (dotsDiv.childNodes.length != images.length) {
+        //remove all extra dots
+        for( let i = 1; i <= dotsDiv.childNodes.length; i++) {
+          dotsDiv.removeChild(dotsDiv.childNodes[i]);
+        }
+        //create new dots
+        if ( images.length > 1) {
+          for ( let i = 1; i < images.length; i++) {
+            var node = document.createElement("H1");
+            var textnode = document.createTextNode("•");
+            node.appendChild(textnode);
+            document.getElementById("img-dots").appendChild(node);
+          }
+        }
+      }
+
 
     fullImgDiv.classList.add("propertyId" + nextProp.id);
 
@@ -377,6 +453,9 @@ class Portfolio extends React.Component {
                   <h4 id="full-img-feet"></h4>
                 </div>
                 <img onClick={this.rightArrow} id="right-arrow" src="img/right-arrow.png" />
+              </div>
+              <div id="img-dots">
+                <h1 className="selected-dot deselected-dot">  &bull;  </h1>
               </div>
             </div>
             {this.state.properties && this.state.filteredProperties.map(property => {
