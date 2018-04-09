@@ -124,7 +124,7 @@ class Portfolio extends React.Component {
 
   closeFilter (event) {
     this.setState({
-      filteredProperties: this.sorthByRank(this.state.properties)
+      filteredProperties: this.sortByRank(this.state.properties)
     })
     document.getElementById("nav-filter").innerHTML = "Filter";
     document.getElementById("close-filter").classList.add("hide");
@@ -352,7 +352,7 @@ class Portfolio extends React.Component {
           dotsDiv.removeChild(dotsDiv.childNodes[i]);
         }
         //create new dots
-        if ( images.length > 1) {
+        if ( images.length > 1 ) {
           for ( let i = 1; i < images.length; i++) {
             var node = document.createElement("H1");
             var textnode = document.createTextNode("•");
@@ -456,6 +456,15 @@ class Portfolio extends React.Component {
               </div>
               <div id="img-dots">
                 <h1 className="selected-dot deselected-dot">  &bull;  </h1>
+                <h1 className="deselected-dot hide">  &bull;  </h1>
+                <h1 className="deselected-dot hide">  &bull;  </h1>
+                <h1 className="deselected-dot hide">  &bull;  </h1>
+                <h1 className="deselected-dot hide">  &bull;  </h1>
+                <h1 className="deselected-dot hide">  &bull;  </h1>
+                <h1 className="deselected-dot hide">  &bull;  </h1>
+                <h1 className="deselected-dot hide">  &bull;  </h1>
+                <h1 className="deselected-dot hide">  &bull;  </h1>
+                <h1 className="deselected-dot hide">  &bull;  </h1>
               </div>
             </div>
             {this.state.properties && this.state.filteredProperties.map(property => {
