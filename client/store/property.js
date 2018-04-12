@@ -95,6 +95,14 @@ export const downAll = (property) =>
       })
       .catch(err => console.log(err))
 
+export const deleteImg = (id) =>
+  dispatch =>
+    axios.delete(`/api/images/${id}`)
+      .then( res => {
+        dispatch(updateProperties(res.data || defaultProperties))
+      })
+      .catch(err => console.log(err))
+
 
 /**
  * REDUCER

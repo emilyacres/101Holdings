@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { logout, updateProperty, deleteProperty, upOne, upAll, downOne, downAll } from '../store'
+import { logout, updateProperty, deleteProperty, upOne, upAll, downOne, downAll, deleteImg } from '../store'
 import { history } from "../history"
 
 
@@ -16,7 +16,7 @@ class AdminEdit extends React.Component {
       acquired: "",
       feet: "",
       zip: "",
-      img: "",
+      images: "",
       thumb: "",
       rank: "",
       id: props.match.params.id,
@@ -35,6 +35,7 @@ class AdminEdit extends React.Component {
     this.dispatchUpAll = props.handleUpAll.bind(this);
     this.dispatchDownOne = props.handleDownOne.bind(this);
     this.dispatchDownAll = props.handleDownAll.bind(this);
+    this.dispatchDeleteImg = props.handleDeleteImg.bind(this);
     this.handleUpOne = this.handleUpOne.bind(this);
     this.handleUpAll = this.handleUpAll.bind(this);
     this.handleDownOne = this.handleDownOne.bind(this);
@@ -43,11 +44,11 @@ class AdminEdit extends React.Component {
     this.getSignedRequest = this.getSignedRequest.bind(this);
     this.uploadFile = this.uploadFile.bind(this);
     this.handleThumb = this.handleThumb.bind(this);
+    this.deleteImg = this.deleteImg.bind(this);
 
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log("recieved props")
     const property = nextProps.properties.filter( el => el.id == this.state.id)[0]
     this.setState({
       name: property.name,
@@ -56,7 +57,7 @@ class AdminEdit extends React.Component {
       acquired: property.acquired,
       feet: property.feet,
       zip: property.zip,
-      img: property.img,
+      images: property.images,
       rank: property.rank,
       thumb: property.thumb,
     })
@@ -72,7 +73,7 @@ class AdminEdit extends React.Component {
         acquired: property.acquired,
         feet: property.feet,
         zip: property.zip,
-        img: property.img,
+        images: property.images,
         rank: property.rank,
         thumb: property.thumb,
       })
@@ -198,11 +199,16 @@ handleDownAll () {
   this.dispatchDownAll(this.state);
 }
 
+deleteImg (id) {
+  console.log("id", id);
+  this.dispatchDeleteImg(id);
+}
+
   render () {
 
     return (
       <div>
-        <div id="admin-edit-img" style={{backgroundImage: `url(http://one-oh-one.s3.us-east-2.amazonaws.com/${this.state.img})`}} />
+        <div id="admin-edit-img" style={ this.state.images[0] ? {backgroundImage: `url(http://one-oh-one.s3.us-east-2.amazonaws.com/${this.state.images[0].filename})`} : null} />
         <h1 id="edit-property">Edit Property</h1>
         <div id="edit-container">
           <h3>Edit general:</h3>
@@ -235,20 +241,26 @@ handleDownAll () {
                 <button id="admin-edit-btn" type="submit" className="btn">Update information</button>
             </div>
           </form>
-          <form onSubmit={this.handleSubmit} className="upload-photo" encType="multipart/form-data">
-            <label className="admin-edit-lbl">Update Photo</label>
-            <p className="img-sub">This should be a landscape photo (1920 x 1080)</p>
-            <input id="file-input-img" onChange={this.handleImg} accept="application/x-zip-compressed,image/*" name="img" type="file" />
-            <input id="admin-edit-btn" className="btn" type="submit" value="Upload new image" />
-          </form>
-          <form onSubmit={this.handleSubmit} className="upload-photo" encType="multipart/form-data">
-            <label className="admin-edit-lbl">Update Thumbnail</label>
-            <p className="img-sub">This should be a square photo (approx. 600 x 600)</p>
-            <input id="file-input-thumb" onChange={this.handleThumb} accept="application/x-zip-compressed,image/*" name="img" type="file" />
-            <input id="admin-edit-btn" className="btn" type="submit" value="Upload new thumbnail" />
-          </form>
+          <div id="edit-img">
+            <h3 >Edit photos:</h3>
+            {this.state.images && this.state.images.map(image => {
+              return <div key={image.id} className="admin-edit-images" style={{backgroundImage: 'url(http://one-oh-one.s3.us-east-2.amazonaws.com/' + image.filename + ')', backgroundPosition:  'center center',
+        backgroundSize: 'cover'}}><button onClick={() => {if(confirm('Are you sure you want to delete this image?')){ this.deleteImg(image.id) }}}className="btn-danger btn">x</button></div>})}
+            <form onSubmit={this.handleSubmit} className="upload-photo" encType="multipart/form-data">
+              <label className="admin-edit-lbl">Update Photo</label>
+              <p className="img-sub">This should be a landscape photo (1920 x 1080)</p>
+              <input id="file-input-img" onChange={this.handleImg} accept="application/x-zip-compressed,image/*" name="img" type="file" />
+              <input id="admin-edit-btn" className="btn" type="submit" value="Upload new image" />
+            </form>
+            <form onSubmit={this.handleSubmit} className="upload-photo" encType="multipart/form-data">
+              <label className="admin-edit-lbl">Update Thumbnail</label>
+              <p className="img-sub">This should be a square photo (approx. 600 x 600)</p>
+              <input id="file-input-thumb" onChange={this.handleThumb} accept="application/x-zip-compressed,image/*" name="img" type="file" />
+              <input id="admin-edit-btn" className="btn" type="submit" value="Upload new thumbnail" />
+            </form>
+          </div>
           <div id="admin-edit-position">
-            <h4>Positioning:</h4>
+            <h4>Edit positioning:</h4>
             <button onClick={this.handleUpOne} id="up-one-btn" className="btn">Move me up one</button>
             <button onClick={this.handleUpAll}id="up-all-btn" className="btn">Move me to top</button>
             <button onClick={this.handleDownOne} id="down-one-btn" className="btn">Move me down one</button>
@@ -294,6 +306,10 @@ const mapDispatch = (dispatch) => {
     handleDownAll (property) {
       dispatch(downAll(property))
     },
+    handleDeleteImg (id) {
+      dispatch(deleteImg(id))
+    },
+
   }
 }
 

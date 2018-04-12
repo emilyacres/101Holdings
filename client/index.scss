@@ -94,6 +94,8 @@ body {
     color: black;
   }
 
+  /* LOGIN STYLES */
+
   #login-bg {
     background-image: url('/img/bg.jpg');
     background-position:  center center;
@@ -157,6 +159,22 @@ body {
 
   #login-btn:hover {
     background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* ADMIN STYLES */
+
+  #edit-img {
+    background-color: Gainsboro;
+    padding: 2vh 10vw;
+    padding-bottom: 5vh;
+    margin: 2vh -10vw;
+    width: 100vw;
+  }
+
+  .admin-edit-images {
+    width: 15vw;
+    min-height: 10vw;
+    margin-right: 2vw;
   }
 
   #admin-container {
@@ -617,7 +635,7 @@ body {
   }
 
 
-
+  /* ABOUT/CONTACT STYLES */
   #about-header {
     margin-bottom: 10vh;
   }
