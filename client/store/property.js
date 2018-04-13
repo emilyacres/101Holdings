@@ -103,6 +103,13 @@ export const deleteImg = (id) =>
       })
       .catch(err => console.log(err))
 
+export const newImg = (img) =>
+  dispatch =>
+    axios.post(`/api/images`, img)
+      .then( res => {
+        dispatch(updateProperties(res.data || defaultProperties))
+      })
+      .catch(err => console.log(err))
 
 /**
  * REDUCER

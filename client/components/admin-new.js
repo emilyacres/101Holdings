@@ -18,6 +18,7 @@ class AdminNew extends React.Component {
       zip: "",
       img: "",
       thumb: "",
+      rank: "",
       id: null
     };
     this.handleName = this.handleName.bind(this);
@@ -34,16 +35,12 @@ class AdminNew extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if(this.props.properties.length && nextProps.properties.length > this.props.properties.length) {
-      let property = nextProps.properties.filter( property => {
-        return property.name === this.state.name;
-      })[0]
-      console.log(property)
-      this.setState({
-        id: property.id
-      })
-      console.log(this.state)
-    }
+    let newRank = nextProps.properties.length+1
+    console.log(newRank)
+    this.setState({
+      rank: newRank
+    })
+    console.log(this.state)
   }
 
   handleName (event) {
@@ -78,7 +75,12 @@ class AdminNew extends React.Component {
   }
   handleSubmit (event) {
     event.preventDefault();
-    this.dispatchSubmit(this.state);
+    if (!this.state.name || !this.state.city || !this.state.state || !this.state.zip || !this.state.acquired || !this.state.feet) {
+      alert("Missing information, make sure all boxes are filled")
+    } else {
+      this.dispatchSubmit(this.state);
+    }
+
   }
 
   addImg (event) {

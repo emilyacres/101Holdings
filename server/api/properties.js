@@ -55,9 +55,6 @@ router.delete('/:propertyid', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   Property.create(req.body, {
-    where: {
-      id: req.params.propertyid,
-    }
   }).then(newProperty => {
     res.json(newProperty);
   }).catch(next)

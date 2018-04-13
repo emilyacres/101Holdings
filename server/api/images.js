@@ -12,7 +12,19 @@ router.delete('/:imageid', (req, res, next) => {
     })
   }).then( properties => {
     res.json(properties)
-  })
+  }).catch(next)
+})
+
+router.post('/', (req, res, next) => {
+  console.log("here", req.body)
+  Image.create(req.body, {
+  }).then( newImg => {
+    return Property.findAll({
+      include: [ { model: Image, as: 'images' } ]
+    })
+  }).then( properties => {
+    res.json(properties)
+  }).catch(next)
 })
 
 module.exports = router

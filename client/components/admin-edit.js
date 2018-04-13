@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { logout, updateProperty, deleteProperty, upOne, upAll, downOne, downAll, deleteImg } from '../store'
+import { logout, updateProperty, deleteProperty, upOne, upAll, downOne, downAll, deleteImg, newImg } from '../store'
 import { history } from "../history"
 
 
@@ -19,6 +19,7 @@ class AdminEdit extends React.Component {
       images: "",
       thumb: "",
       rank: "",
+      newImg: "",
       id: props.match.params.id,
     };
 
@@ -36,6 +37,7 @@ class AdminEdit extends React.Component {
     this.dispatchDownOne = props.handleDownOne.bind(this);
     this.dispatchDownAll = props.handleDownAll.bind(this);
     this.dispatchDeleteImg = props.handleDeleteImg.bind(this);
+    this.dispatchImg = props.handleImg.bind(this)
     this.handleUpOne = this.handleUpOne.bind(this);
     this.handleUpAll = this.handleUpAll.bind(this);
     this.handleDownOne = this.handleDownOne.bind(this);
@@ -45,6 +47,7 @@ class AdminEdit extends React.Component {
     this.uploadFile = this.uploadFile.bind(this);
     this.handleThumb = this.handleThumb.bind(this);
     this.deleteImg = this.deleteImg.bind(this);
+    this.handleNewImg = this.handleNewImg.bind(this);
 
   }
 
@@ -120,6 +123,15 @@ class AdminEdit extends React.Component {
     this.dispatchSubmit(this.state);
   }
 
+  handleNewImg (event) {
+    event.preventDefault();
+    let imgObj = {
+      filename: this.state.newImg,
+      propertyId: this.state.id
+    }
+    this.dispatchImg(imgObj);
+  }
+
   handleDelete (event) {
     this.dispatchDelete(this.state.id)
   }
@@ -143,27 +155,28 @@ class AdminEdit extends React.Component {
       return alert('No file selected.');
     }
     this.setState({
-      img: file.name
+      newImg: file.name
     })
     this.getSignedRequest(file);
   }
 
   getSignedRequest (file) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
-  xhr.onreadystatechange = () => {
-    if(xhr.readyState === 4){
-      if(xhr.status === 200){
-                console.log(xhr.responseText)
-        const response = JSON.parse(xhr.responseText);
-        this.uploadFile(file, response.signedRequest, response.url);
+    console.log(file)
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+    xhr.onreadystatechange = () => {
+      if(xhr.readyState === 4){
+        if(xhr.status === 200){
+          console.log("response", xhr.status)
+          const response = JSON.parse(xhr.responseText);
+          this.uploadFile(file, response.signedRequest, response.url);
+        }
+        else{
+          alert('Could not get signed URL.');
+        }
       }
-      else{
-        alert('Could not get signed URL.');
-      }
-    }
-  };
-  xhr.send();
+    };
+    xhr.send();
 }
 
 uploadFile (file, signedRequest, url) {
@@ -246,8 +259,8 @@ deleteImg (id) {
             {this.state.images && this.state.images.map(image => {
               return <div key={image.id} className="admin-edit-images" style={{backgroundImage: 'url(http://one-oh-one.s3.us-east-2.amazonaws.com/' + image.filename + ')', backgroundPosition:  'center center',
         backgroundSize: 'cover'}}><button onClick={() => {if(confirm('Are you sure you want to delete this image?')){ this.deleteImg(image.id) }}}className="btn-danger btn">x</button></div>})}
-            <form onSubmit={this.handleSubmit} className="upload-photo" encType="multipart/form-data">
-              <label className="admin-edit-lbl">Update Photo</label>
+            <form onSubmit={this.handleNewImg} className="upload-photo" encType="multipart/form-data">
+              <label className="admin-edit-lbl">Add Photo</label>
               <p className="img-sub">This should be a landscape photo (1920 x 1080)</p>
               <input id="file-input-img" onChange={this.handleImg} accept="application/x-zip-compressed,image/*" name="img" type="file" />
               <input id="admin-edit-btn" className="btn" type="submit" value="Upload new image" />
@@ -309,6 +322,9 @@ const mapDispatch = (dispatch) => {
     handleDeleteImg (id) {
       dispatch(deleteImg(id))
     },
+    handleImg (img) {
+      dispatch(newImg(img))
+    }
 
   }
 }
