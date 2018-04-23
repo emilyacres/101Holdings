@@ -75,7 +75,9 @@ class About extends React.Component {
             <img src="img/logo-black.png" className="mobile" id="about-title" />
             <Link to="/"><img src="img/x.png" id="close-about" /></Link>
           </div>
-
+          <div>
+            <h4 id="about-text">101 Holdings is a privately held commercial real estate owner and manager of institutional quality assets. 101 Holdings is a generational holder that continues to acquire property throughout New York City, the tri-state area and major markets across the country.  101 Holdings is proud to be well regarded by the industry for its ability to react quickly and transact expediently.</h4>
+          </div>
           <div className="about-sub">
             <p className="bold">General Inquires</p>
             <p>info@101-holdings.com</p>
