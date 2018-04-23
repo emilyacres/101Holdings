@@ -642,7 +642,9 @@ body {
 
   #about-text {
     margin:15vh 5vh 10vh 0;
+    line-height: 3vw;
   }
+
   #close-about {
     margin-top: 2vh;
     width: 1.3vw;
@@ -913,6 +915,11 @@ body {
       top: 3vh;
       right: 7vw;
       width: 8vw;
+  }
+
+  #about-text {
+    margin:10vh 0 5vh 0;
+    line-height: 5vh;
   }
 
   #about-title {
